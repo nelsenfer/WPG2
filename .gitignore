@@ -1,0 +1,40 @@
+/[Aa]ssets/AssetStoreTools*
+
+# --- Folder yang dihasilkan Unity (Wajib Diabaikan) ---
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Logs]/
+[MemoryCaptures]/
+
+# --- File Project Visual Studio ---
+ExportedObj/
+.vs/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+
+# --- File Project Rider ---
+.idea/
+*.sln.iml
+
+# --- File Sistem ---
+.DS_Store
+Thumbs.db
+
+# --- Folder Khusus (Opsional) ---
+# Hapus tanda pagar jika ingin mengabaikan folder build atau dokumentasi tertentu
+# /[Bb]in/
+# /[Aa]ssetPackages/
