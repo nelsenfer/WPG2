@@ -46,7 +46,6 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    // 3. LOGIKA ADD ITEM DIUBAH UNTUK MENGECEK BARANG KEMBAR
     public void AddItem(ItemData newItem)
     {
         bool sudahAda = false;
