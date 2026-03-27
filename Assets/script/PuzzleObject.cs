@@ -22,6 +22,10 @@ public class PuzzleObject : MonoBehaviour
             if (syaratItem.Count == 0)
             {
                 Debug.Log("PUZZLE SELESAI! Gerbang terbuka.");
+
+                // --- KODE BARU: Beritahu GameManager bahwa misi puzzle ini selesai ---
+                ObjectiveManager.instance.LanjutMisi();
+
                 gameObject.SetActive(false); // Menghilangkan objek pintu
             }
 
