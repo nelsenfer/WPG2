@@ -4,18 +4,17 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;
     private Rigidbody2D rb;
-    private Inventory inventoryPlayer; 
-    
+    private Inventory inventoryPlayer;
+
     // Tambahkan referensi Animator
-    private Animator anim; 
+    private Animator anim;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        inventoryPlayer = GetComponent<Inventory>(); 
-        
-        // Mengambil komponen Animator dari Player
-        anim = GetComponent<Animator>(); 
+        inventoryPlayer = FindObjectOfType<Inventory>();
+
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -24,19 +23,19 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.linearVelocity = Vector2.zero;
             anim.SetFloat("Speed", 0f); // Beritahu animasi untuk diam
-            return; 
+            return;
         }
 
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
-        
+
         // Menggerakkan player
         rb.linearVelocity = new Vector2(moveX * speed, moveY * speed);
 
         // --- LOGIKA ANIMASI ---
-        
+
         // Cek apakah player sedang menekan tombol gerak
-        if (moveX != 0 || moveY != 0) 
+        if (moveX != 0 || moveY != 0)
         {
             // Kirim arah X dan Y ke Animator agar karakter menghadap arah yang benar
             anim.SetFloat("MoveX", moveX);

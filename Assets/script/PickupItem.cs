@@ -11,7 +11,7 @@ public class PickupItem : MonoBehaviour
     // --- KODE BARU: Penanda apakah item ini memicu pergantian misi ---
     public bool isPemicuMisi = false;
 
-    void Start() { playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>(); }
+    void Start() { playerInventory = FindFirstObjectByType<Inventory>(); }
 
     void Update()
     {

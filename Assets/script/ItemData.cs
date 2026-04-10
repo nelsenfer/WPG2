@@ -1,9 +1,9 @@
 using UnityEngine;
 
-// Baris ini membuat menu baru saat kamu klik kanan di jendela Project Unity
-[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
+[CreateAssetMenu(fileName = "Item", menuName = "Item Data")]
 public class ItemData : ScriptableObject
 {
-    // Cukup simpan nama itemnya saja untuk sekarang
     public string itemName;
+    [TextArea] public string itemDescription; // ← tambahkan ini
+    public Sprite icon; // opsional
 }

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1768222461567393656}
   - component: {fileID: 6636420316288697904}
   - component: {fileID: 1993939065260737937}
-  - component: {fileID: 7981449729042691731}
   - component: {fileID: 8105739266273662457}
   - component: {fileID: 6372546087387201495}
   m_Layer: 0
@@ -179,23 +178,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
---- !u!114 &7981449729042691731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4549240547839429225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13384c37e22c765478b440248ac1ffda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemList: []
-  inventoryPanel: {fileID: 0}
-  itemTextUI: {fileID: 0}
-  isOpen: 0
-  puzzleTerdekat: {fileID: 0}
 --- !u!95 &8105739266273662457
 Animator:
   serializedVersion: 7

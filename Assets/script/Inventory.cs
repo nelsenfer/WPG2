@@ -2,32 +2,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-// 1. KITA BUAT CLASS BARU UNTUK SLOT INVENTORY
-[System.Serializable] // Agar strukturnya bisa terlihat di Inspector Unity
+[System.Serializable]
 public class ItemSlot
 {
     public ItemData data;
     public int jumlah;
-
-    // Ini adalah 'Constructor' untuk membuat slot baru dengan mudah
-    public ItemSlot(ItemData itemData, int jumlahAwal)
-    {
-        data = itemData;
-        jumlah = jumlahAwal;
-    }
+    public ItemSlot(ItemData itemData, int jumlahAwal) { data = itemData; jumlah = jumlahAwal; }
 }
 
 public class Inventory : MonoBehaviour
 {
-    // 2. SEKARANG LIST-NYA MENYIMPAN 'ItemSlot', BUKAN LAGI 'ItemData' MENTAH
     public List<ItemSlot> itemList = new List<ItemSlot>();
 
     public GameObject inventoryPanel;
-    public TMP_Text itemTextUI;
+    public TMP_Text itemTextUI;   // teks daftar item
+    public TMP_Text descNameUI;   // nama item yang dipilih
+    public TMP_Text descBodyUI;   // keterangan item yang dipilih
+
     public bool isOpen = false;
     private int selectedIndex = 0;
 
-    public PuzzleObject puzzleTerdekat = null;
+    public Pintu pintuTerdekat = null;
 
     void Update()
     {
@@ -40,103 +35,94 @@ public class Inventory : MonoBehaviour
 
         if (isOpen && itemList.Count > 0)
         {
-            if (Input.GetKeyDown(KeyCode.W)) { if (selectedIndex > 0) selectedIndex--; UpdateInventoryUI(); }
-            if (Input.GetKeyDown(KeyCode.S)) { if (selectedIndex < itemList.Count - 1) selectedIndex++; UpdateInventoryUI(); }
-            if (Input.GetKeyDown(KeyCode.Return)) { UseItem(); }
+            if (Input.GetKeyDown(KeyCode.W)) { selectedIndex = Mathf.Max(0, selectedIndex - 1); UpdateInventoryUI(); }
+            if (Input.GetKeyDown(KeyCode.S)) { selectedIndex = Mathf.Min(itemList.Count - 1, selectedIndex + 1); UpdateInventoryUI(); }
+            if (Input.GetKeyDown(KeyCode.Return)) UseItem();
         }
     }
 
     public void AddItem(ItemData newItem)
     {
-        bool sudahAda = false;
-
-        // Cek satu-satu isi tas, apakah barang ini sudah pernah diambil?
         foreach (ItemSlot slot in itemList)
         {
-            if (slot.data == newItem)
-            {
-                slot.jumlah++; // Jika sudah ada, tambahkan saja angkanya!
-                sudahAda = true;
-                break; // Berhenti mencari
-            }
+            if (slot.data == newItem) { slot.jumlah++; if (isOpen) UpdateInventoryUI(); return; }
         }
-
-        // Jika barang ini benar-benar baru, buat slot baru di bagian bawah list
-        if (sudahAda == false)
-        {
-            itemList.Add(new ItemSlot(newItem, 1));
-        }
-
+        itemList.Add(new ItemSlot(newItem, 1));
         if (isOpen) UpdateInventoryUI();
     }
 
-    // 4. LOGIKA UI DIUBAH UNTUK MENAMPILKAN ANGKA "x2", "x3"
     void UpdateInventoryUI()
     {
-        if (itemList.Count == 0) { itemTextUI.text = "INVENTORY KOSONG"; return; }
+        // -- Daftar item (panel kiri/utama) --
+        if (itemList.Count == 0)
+        {
+            itemTextUI.text = "[ BAG KOSONG ]";
+            descNameUI.text = "—";
+            descBodyUI.text = "";
+            return;
+        }
 
-        itemTextUI.text = "INVENTORY:\n\n";
+        itemTextUI.text = "";
         for (int i = 0; i < itemList.Count; i++)
         {
-            // Ambil nama item
-            string teksItem = itemList[i].data.itemName;
+            string baris = itemList[i].data.itemName;
+            if (itemList[i].jumlah > 1) baris += "  x" + itemList[i].jumlah;
 
-            // Jika jumlahnya lebih dari 1, tambahkan teks " xJumlah" di belakang namanya
-            if (itemList[i].jumlah > 1)
-            {
-                teksItem += " x" + itemList[i].jumlah;
-            }
-
-            // Tampilkan kursor ">"
             if (i == selectedIndex)
-                itemTextUI.text += "> " + teksItem + "\n";
+                itemTextUI.text += "<color=#ffffff>" + baris + "</color>\n";
             else
-                itemTextUI.text += "  " + teksItem + "\n";
+                itemTextUI.text += "<color=#555555>" + baris + "</color>\n";
         }
+
+        // -- Keterangan item yang dipilih (panel bawah) --
+        ItemData cur = itemList[selectedIndex].data;
+        descNameUI.text = cur.itemName;
+        descBodyUI.text = cur.itemDescription; // tambahkan field ini di ItemData
     }
 
-    // 5. LOGIKA USE ITEM DIUBAH UNTUK MENGURANGI JUMLAH, BUKAN LANGSUNG MENGHAPUS
     void UseItem()
     {
         ItemData itemToUse = itemList[selectedIndex].data;
-        bool itemTerpakai = false; // Penanda apakah item sukses digunakan
+        bool itemTerpakai = false;
 
-        if (puzzleTerdekat != null)
+        if (pintuTerdekat != null)
         {
-            bool berhasilDipakai = puzzleTerdekat.TerimaItem(itemToUse);
-            if (berhasilDipakai == true)
-            {
-                itemTerpakai = true; // Tandai sukses
-            }
+            if (pintuTerdekat.TerimaItem(itemToUse)) itemTerpakai = true;
         }
         else
         {
-            Debug.Log("Item '" + itemToUse.itemName + "' tidak bisa digunakan di sini.");
-            // Nanti kamu bisa tambahkan logika untuk item yang bisa dimakan/dipakai sendiri di sini
+            descBodyUI.text = "> " + itemToUse.itemName + " tidak bisa\n  digunakan di sini.";
         }
 
-        // Jika item SUKSES terpakai ke puzzle
-        if (itemTerpakai == true)
+        if (itemTerpakai)
         {
-            itemList[selectedIndex].jumlah--; // Kurangi jumlahnya 1
-
-            // Jika setelah dikurangi ternyata jumlahnya habis (0), baru hapus dari daftar list
-            if (itemList[selectedIndex].jumlah <= 0)
-            {
-                itemList.RemoveAt(selectedIndex);
-            }
-
-            // Mencegah error kursor jika menghapus baris paling bawah
-            if (selectedIndex >= itemList.Count && itemList.Count > 0)
-            {
-                selectedIndex = itemList.Count - 1;
-            }
-            else if (itemList.Count == 0)
-            {
-                selectedIndex = 0;
-            }
+            itemList[selectedIndex].jumlah--;
+            if (itemList[selectedIndex].jumlah <= 0) itemList.RemoveAt(selectedIndex);
+            if (selectedIndex >= itemList.Count) selectedIndex = Mathf.Max(0, itemList.Count - 1);
         }
 
         UpdateInventoryUI();
+    }
+
+    public bool CekPunyaItem(ItemData itemDicari)
+    {
+        foreach (ItemSlot slot in itemList)
+        {
+            if (slot.data == itemDicari) return true;
+        }
+        return false;
+    }
+
+    public void HapusItemDiamDiam(ItemData itemDihapus)
+    {
+        for (int i = 0; i < itemList.Count; i++)
+        {
+            if (itemList[i].data == itemDihapus)
+            {
+                itemList[i].jumlah--;
+                if (itemList[i].jumlah <= 0) itemList.RemoveAt(i);
+                return;
+            }
+        }
     }
 }
