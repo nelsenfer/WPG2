@@ -4,47 +4,69 @@ public class PickupItem : MonoBehaviour
 {
     public ItemData itemData;
 
+    [HideInInspector]
     public GameObject interactUI;
+
     private bool canPickup = false;
-    private Inventory playerInventory;
 
-    // --- KODE BARU: Penanda apakah item ini memicu pergantian misi ---
-    public bool isPemicuMisi = false;
+    void Start()
+    {
+        // Otomatis mencari Canvas di dalam Item
+        Canvas canvasChild = GetComponentInChildren<Canvas>(true);
 
-    void Start() { playerInventory = FindFirstObjectByType<Inventory>(); }
+        if (canvasChild != null)
+        {
+            interactUI = canvasChild.gameObject;
+            interactUI.SetActive(false);
+            Debug.Log($"[DEBUG ITEM] Sukses! UI ditemukan pada item: {gameObject.name}");
+        }
+        else
+        {
+            Debug.LogError($"[DEBUG ITEM] ERROR! Canvas tidak ditemukan di dalam item: {gameObject.name}. Cek Hierarchy!");
+        }
+    }
 
     void Update()
     {
         if (canPickup && Input.GetKeyDown(KeyCode.E))
         {
-            // --- KODE BARU: Cek keamanan (Defensive Programming) ---
-            if (itemData != null)
+            Inventory tasPlayer = FindFirstObjectByType<Inventory>();
+            if (tasPlayer != null)
             {
-                playerInventory.AddItem(itemData); // Kirim FILE DATA ke inventory
-
-                // --- KODE BARU: Cek apakah item ini menyelesaikan misi ---
-                if (isPemicuMisi == true)
-                {
-                    ObjectiveManager.instance.LanjutMisi();
-                }
-
-                interactUI.SetActive(false);
+                // INI SUDAH BENAR: Pakai AddItem
+                tasPlayer.AddItem(itemData);
+                Debug.Log($"[DEBUG ITEM] {itemData.itemName} berhasil masuk tas!");
                 Destroy(gameObject);
-            }
-            else
-            {
-                // Muncul peringatan di console, tapi game tidak crash
-                Debug.LogWarning("Waduh! Objek item ini belum diisi file ItemData di Inspector!");
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) { canPickup = true; interactUI.SetActive(true); }
+        if (collision.CompareTag("Player"))
+        {
+            canPickup = true;
+            Debug.Log($"[DEBUG ITEM] Player MENDEKAT ke {gameObject.name}. Mencoba menyalakan UI...");
+
+            if (interactUI != null)
+            {
+                interactUI.SetActive(true);
+                Debug.Log("[DEBUG ITEM] UI disuruh nyala!");
+            }
+        }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) { canPickup = false; interactUI.SetActive(false); }
+        if (collision.CompareTag("Player"))
+        {
+            canPickup = false;
+            Debug.Log($"[DEBUG ITEM] Player MENJAUH dari {gameObject.name}. Mematikan UI...");
+
+            if (interactUI != null)
+            {
+                interactUI.SetActive(false);
+            }
+        }
     }
 }

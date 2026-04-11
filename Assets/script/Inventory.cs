@@ -26,6 +26,7 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
+        // KODE ASLIMU KEMBALI: Pakai tombol I untuk buka tas
         if (Input.GetKeyDown(KeyCode.I))
         {
             isOpen = !isOpen;
@@ -77,7 +78,7 @@ public class Inventory : MonoBehaviour
         // -- Keterangan item yang dipilih (panel bawah) --
         ItemData cur = itemList[selectedIndex].data;
         descNameUI.text = cur.itemName;
-        descBodyUI.text = cur.itemDescription; // tambahkan field ini di ItemData
+        descBodyUI.text = cur.itemDescription;
     }
 
     void UseItem()
