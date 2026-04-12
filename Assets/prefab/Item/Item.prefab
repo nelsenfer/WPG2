@@ -58,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cc3b4f943fb66a140b0fb042777e3af6, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -149,6 +149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 22493234e17106d4e939324558e850b2, type: 2}
+  selesaikanMisiSaatDipungut: 0
+  targetIndexMisi: 0
   interactUI: {fileID: 0}
 --- !u!1 &5820835536087651451
 GameObject:

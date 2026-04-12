@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Data_GagangPintu
   m_EditorClassIdentifier: 
   itemName: Gagang Pintu
+  itemDescription: 'gagang pintu entah dari mana '
+  icon: {fileID: 0}

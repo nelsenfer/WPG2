@@ -4,6 +4,15 @@ public class PickupItem : MonoBehaviour
 {
     public ItemData itemData;
 
+    // --- SISTEM TRIGGER MISI (SUDAH DI-UPGRADE) ---
+    [Header("Pengaturan Misi")]
+    [Tooltip("Centang HANYA untuk item misi")]
+    public bool selesaikanMisiSaatDipungut = false;
+
+    [Tooltip("Jika dicentang, item ini HANYA akan men-trigger misi pada index angka ini (Mulai dari 0)")]
+    public int targetIndexMisi = 0;
+    // ----------------------------------------------
+
     [HideInInspector]
     public GameObject interactUI;
 
@@ -11,18 +20,11 @@ public class PickupItem : MonoBehaviour
 
     void Start()
     {
-        // Otomatis mencari Canvas di dalam Item
         Canvas canvasChild = GetComponentInChildren<Canvas>(true);
-
         if (canvasChild != null)
         {
             interactUI = canvasChild.gameObject;
             interactUI.SetActive(false);
-            Debug.Log($"[DEBUG ITEM] Sukses! UI ditemukan pada item: {gameObject.name}");
-        }
-        else
-        {
-            Debug.LogError($"[DEBUG ITEM] ERROR! Canvas tidak ditemukan di dalam item: {gameObject.name}. Cek Hierarchy!");
         }
     }
 
@@ -33,9 +35,24 @@ public class PickupItem : MonoBehaviour
             Inventory tasPlayer = FindFirstObjectByType<Inventory>();
             if (tasPlayer != null)
             {
-                // INI SUDAH BENAR: Pakai AddItem
                 tasPlayer.AddItem(itemData);
-                Debug.Log($"[DEBUG ITEM] {itemData.itemName} berhasil masuk tas!");
+                Debug.Log($"[DEBUG ITEM] {itemData.itemName} masuk tas!");
+
+                // --- PENGAMAN LAPIS DUA ---
+                if (selesaikanMisiSaatDipungut && ObjectiveManager.instance != null)
+                {
+                    // Cek apakah pemain sedang di misi yang tepat untuk item ini
+                    if (ObjectiveManager.instance.indeksMisiSaatIni == targetIndexMisi)
+                    {
+                        ObjectiveManager.instance.LanjutMisi();
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[WARNING] {itemData.itemName} dipungut lebih awal! Misi tidak di-trigger karena sekarang masih Misi ke-{ObjectiveManager.instance.indeksMisiSaatIni}");
+                    }
+                }
+                // --------------------------
+
                 Destroy(gameObject);
             }
         }
@@ -46,13 +63,7 @@ public class PickupItem : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             canPickup = true;
-            Debug.Log($"[DEBUG ITEM] Player MENDEKAT ke {gameObject.name}. Mencoba menyalakan UI...");
-
-            if (interactUI != null)
-            {
-                interactUI.SetActive(true);
-                Debug.Log("[DEBUG ITEM] UI disuruh nyala!");
-            }
+            if (interactUI != null) interactUI.SetActive(true);
         }
     }
 
@@ -61,12 +72,7 @@ public class PickupItem : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             canPickup = false;
-            Debug.Log($"[DEBUG ITEM] Player MENJAUH dari {gameObject.name}. Mematikan UI...");
-
-            if (interactUI != null)
-            {
-                interactUI.SetActive(false);
-            }
+            if (interactUI != null) interactUI.SetActive(false);
         }
     }
 }

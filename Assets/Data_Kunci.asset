@@ -13,3 +13,7 @@ MonoBehaviour:
   m_Name: Data_Kunci
   m_EditorClassIdentifier: 
   itemName: Kunci Gudang
+  itemDescription: 'ini deskripsi kucinya gitu yaa
+
+'
+  icon: {fileID: 0}

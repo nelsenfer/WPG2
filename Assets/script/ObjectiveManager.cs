@@ -1,68 +1,83 @@
+using System.Collections; // Wajib ditambah untuk fitur Timer (Coroutine)
 using UnityEngine;
 using TMPro;
 
 public class ObjectiveManager : MonoBehaviour
 {
-    // Trik "Singleton" agar script lain bisa memanggil script ini dengan mudah
     public static ObjectiveManager instance;
 
-    [Header("Pengaturan UI")]
-    public GameObject objectivePanel;
-    public TMP_Text objectiveText;
-
-    [Header("Daftar Misi")]
-    // Array string ini akan muncul sebagai list di Inspector Unity
+    [Header("Daftar Misi (Tulis di Inspector)")]
     public string[] daftarMisi;
+    public int indeksMisiSaatIni = 0;
 
-    // Penunjuk misi nomor berapa yang sedang aktif (dimulai dari 0)
-    private int misiSekarang = 0;
+    [Header("UI Misi Detail (Buka pakai Tab)")]
+    public GameObject panelMisiUI; // ObjectivePanel lama milikmu
+    public TMP_Text teksMisiUI;    // ObjectiveText lama milikmu
+    private bool isMisiOpen = false;
 
-    void Awake()
+    [Header("UI Notifikasi (Pojok Kiri Atas)")]
+    public GameObject panelNotifUI; // Panel/Teks baru untuk pop-up sekilas
+    public TMP_Text teksNotifUI;    // Teks di dalam pop-up tersebut
+    public float lamaNotifMuncul = 4f; // Berapa detik notifnya mejeng di layar
+
+    private void Awake()
     {
-        // Mengaktifkan sistem Singleton saat game mulai
-        instance = this;
+        if (instance == null) instance = this;
+        else Destroy(gameObject);
     }
 
-    void Start()
+    private void Start()
     {
         UpdateUIMisi();
+
+        // Sembunyikan semua UI Misi saat game baru dimulai
+        if (panelMisiUI != null) { isMisiOpen = false; panelMisiUI.SetActive(false); }
+        if (panelNotifUI != null) panelNotifUI.SetActive(false);
     }
 
-    void Update()
+    private void Update()
     {
-        // Jika tombol Tab DITEKAN dan DITAHAN, panel muncul
+        // Fitur Buka/Tutup Detail Misi pakai Tab
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            objectivePanel.SetActive(true);
-        }
-        // Jika tombol Tab DILEPAS, panel kembali hilang
-        else if (Input.GetKeyUp(KeyCode.Tab))
-        {
-            objectivePanel.SetActive(false);
+            if (panelMisiUI != null)
+            {
+                isMisiOpen = !isMisiOpen;
+                panelMisiUI.SetActive(isMisiOpen);
+            }
         }
     }
 
-    // Fungsi ini bisa dipanggil dari script Item atau Pintu!
     public void LanjutMisi()
     {
-        // Cek agar tidak error jika misi sudah habis
-        if (misiSekarang < daftarMisi.Length - 1)
+        indeksMisiSaatIni++;
+        UpdateUIMisi();
+
+        // Fitur Tambahan: Munculkan Notifikasi Pop-up Pojok Kiri
+        if (panelNotifUI != null)
         {
-            misiSekarang++; // Pindah ke misi selanjutnya
-            UpdateUIMisi(); // Perbarui teks di layar
-            Debug.Log("Misi Diperbarui!");
-        }
-        else
-        {
-            objectiveText.text = "MISI:\nSemua Misi Selesai!";
+            StopAllCoroutines(); // Reset timer jaga-jaga kalau misi beruntun cepat
+            StartCoroutine(MunculkanNotifSekilas());
         }
     }
 
-    void UpdateUIMisi()
+    public void UpdateUIMisi()
     {
-        if (daftarMisi.Length > 0)
-        {
-            objectiveText.text = "MISI SEKARANG:\n" + daftarMisi[misiSekarang];
-        }
+        // Tentukan kata-katanya
+        string kalimatMisi = (indeksMisiSaatIni < daftarMisi.Length) ? daftarMisi[indeksMisiSaatIni] : "Semua misi selesai!";
+
+        // Update teks di Panel Tab
+        if (teksMisiUI != null) teksMisiUI.text = "Objective:\n- " + kalimatMisi;
+
+        // Update teks di Pop-up Pojok Kiri
+        if (teksNotifUI != null) teksNotifUI.text = "Update Misi:\n" + kalimatMisi;
+    }
+
+    // Ini adalah fungsi Timer pengatur waktu pop-up
+    private IEnumerator MunculkanNotifSekilas()
+    {
+        panelNotifUI.SetActive(true); // Nyalakan UI Pojok Kiri
+        yield return new WaitForSeconds(lamaNotifMuncul); // Tunggu selama 4 detik
+        panelNotifUI.SetActive(false); // Matikan lagi UI Pojok Kiri
     }
 }
