@@ -2346,8 +2346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b45169d0c489984c9fbcbf8b557a944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pesanHint: '"Gunakan [W][A][S][D] untuk bergerak.dan klik enter/space untuk keluar
-    dari tutorial"'
+  pesanHint: '"Gunakan [W][A][S][D] untuk bergerak.dan klik [Enter]/[Space] untuk
+    keluar dari tutorial"'
   ikonTombol: {fileID: 0}
   gunakanPanelBesar: 1
   bekukanGame: 1
@@ -5140,8 +5140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b45169d0c489984c9fbcbf8b557a944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pesanHint: '"Gunakan tombol E di keyboard untukl berinteraksi dengan item. dan
-    klik enter/space untuk keluar dari tutoria"'
+  pesanHint: '"Gunakan tombol [E] di  untukl berinteraksi dengan item. klik [Enter]/[Space]
+    untuk keluar"'
   ikonTombol: {fileID: 0}
   gunakanPanelBesar: 0
   bekukanGame: 1
@@ -5579,7 +5579,7 @@ PrefabInstance:
     - target: {fileID: 4218905666626331436, guid: 70f9041728a58364fbd5657b801c9768, type: 3}
       propertyPath: interactUI
       value: 
-      objectReference: {fileID: 2014475249}
+      objectReference: {fileID: 0}
     - target: {fileID: 4218905666626331436, guid: 70f9041728a58364fbd5657b801c9768, type: 3}
       propertyPath: isPemicuMisi
       value: 1
@@ -6112,7 +6112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -250, y: 0}
+  m_AnchoredPosition: {x: -263, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1574374514
@@ -6671,8 +6671,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 66, y: 0}
-  m_SizeDelta: {x: 420, y: 120}
+  m_AnchoredPosition: {x: 71, y: 0}
+  m_SizeDelta: {x: 500, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1815227306
 MonoBehaviour:
@@ -7101,8 +7101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b45169d0c489984c9fbcbf8b557a944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pesanHint: '"Gunakan Tab atau lihat pojok kiri atas untuk melihat misi atau objektif.
-    dan klik enter/space untuk keluar dari tutoria"'
+  pesanHint: '"Gunakan [Tab] atau lihat pojok kiri atas untuk melihat objektif. klik
+    [Enter]/[Space] untuk keluar"'
   ikonTombol: {fileID: 0}
   gunakanPanelBesar: 0
   bekukanGame: 1
@@ -7260,11 +7260,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!1 &2014475249 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5820835536087651451, guid: 70f9041728a58364fbd5657b801c9768, type: 3}
-  m_PrefabInstance: {fileID: 1463462538}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2038451925
 GameObject:
   m_ObjectHideFlags: 0
@@ -7397,8 +7392,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b45169d0c489984c9fbcbf8b557a944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pesanHint: '"Gunakan tombol i di keyboard untuk melihat item yang kita miliki di
-    tas. dan klik enter/space untuk keluar dari tutoria"'
+  pesanHint: '"Gunakan tombol [i] di  untuk melihat item di tas.  klik [Enter]/[Space]
+    untuk keluar"'
   ikonTombol: {fileID: 0}
   gunakanPanelBesar: 0
   bekukanGame: 1
