@@ -1,15 +1,14 @@
 using UnityEngine;
-using UnityEngine.UI; // Wajib untuk akses Image
+using UnityEngine.UI;
 using TMPro;
 
-// Ini "Resep Laci" baru kita. [Serializable] bikin laci ini bisa nongol di Inspector Unity!
 [System.Serializable]
 public struct BarisDialog
 {
     public string namaKarakter;
     [TextArea] public string isiTeks;
     public Sprite potretKarakter;
-    public bool potretDiKiri; // Centang = Kiri (Player), Gak dicentang = Kanan (NPC)
+    public bool potretDiKiri;
 }
 
 public class DialogManager : MonoBehaviour
@@ -18,16 +17,21 @@ public class DialogManager : MonoBehaviour
 
     [Header("UI Dialog")]
     public GameObject panelDialog;
-    public TMP_Text teksNama;   // Taruh UI teks nama di sini (kalau ada)
+    public TMP_Text teksNama;
     public TMP_Text teksDialog;
-    public Image potretKiri;    // Taruh UI Image Kiri di sini
-    public Image potretKanan;   // Taruh UI Image Kanan di sini
+    public Image potretKiri;
+    public Image potretKanan;
 
     [Header("Data Cerita Awal Game")]
     public BarisDialog[] alurCerita;
 
     private int indexKalimat;
-    private bool sedangDialog = false;
+
+    // Penanda buat Satpam PlayerMovement
+    public bool sedangDialog = false;
+
+    // Penanda kalau ini cuma interaksi benda (1 baris aja)
+    private bool modeInteraksiBenda = false;
 
     private void Awake()
     {
@@ -38,67 +42,62 @@ public class DialogManager : MonoBehaviour
     private void Start()
     {
         panelDialog.SetActive(false);
-        MulaiDialogAwal();
+        MulaiDialogAwal(); // <-- Sekarang dia bakal otomatis jalan pas game mulai!
     }
 
     private void Update()
     {
+        // Pakai Klik Kiri, Spasi, atau Enter buat nutup dialog
         if (sedangDialog && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetMouseButtonDown(0)))
         {
-            LanjutKeKalimatBerikutnya();
+            if (modeInteraksiBenda)
+            {
+                // Kalau cuma ngecek pintu, langsung tutup panelnya!
+                SelesaiDialog();
+            }
+            else
+            {
+                // Kalau lagi cutscene panjang, lanjut laci berikutnya
+                LanjutKeKalimatBerikutnya();
+            }
         }
     }
 
+    // Fungsi 1: Buat Cutscene Panjang Berantai (Array)
     public void MulaiDialogAwal()
     {
         sedangDialog = true;
+        modeInteraksiBenda = false;
         panelDialog.SetActive(true);
         indexKalimat = 0;
-        Time.timeScale = 0f; // Pause waktu
-
         TampilkanKalimat(alurCerita[indexKalimat]);
     }
 
     public void LanjutKeKalimatBerikutnya()
     {
         indexKalimat++;
-
-        if (indexKalimat < alurCerita.Length)
-        {
-            TampilkanKalimat(alurCerita[indexKalimat]);
-        }
-        else
-        {
-            SelesaiDialog();
-        }
+        if (indexKalimat < alurCerita.Length) TampilkanKalimat(alurCerita[indexKalimat]);
+        else SelesaiDialog();
     }
 
-    // Fungsi khusus untuk ngatur UI tiap kali teks ganti
     private void TampilkanKalimat(BarisDialog baris)
     {
-        // 1. Tampilkan Teks & Nama
         teksDialog.text = baris.isiTeks;
         if (teksNama != null) teksNama.text = baris.namaKarakter;
 
-        // 2. Logika Potret Kiri/Kanan
         if (baris.potretDiKiri)
         {
-            // Nyalakan potret kiri, matikan kanan
             potretKiri.gameObject.SetActive(true);
             potretKanan.gameObject.SetActive(false);
-
             if (baris.potretKarakter != null) potretKiri.sprite = baris.potretKarakter;
         }
         else
         {
-            // Nyalakan potret kanan, matikan kiri
             potretKanan.gameObject.SetActive(true);
             potretKiri.gameObject.SetActive(false);
-
             if (baris.potretKarakter != null) potretKanan.sprite = baris.potretKarakter;
         }
 
-        // Opsional: Kalau lacinya nggak diisi gambar sama sekali, sembunyikan potretnya
         if (baris.potretKarakter == null)
         {
             potretKiri.gameObject.SetActive(false);
@@ -106,10 +105,42 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    // --- INI FUNGSI BARU BUAT PINTU / BENDA ---
+    // --- FUNGSI BARU BUAT PINTU / BENDA (YANG UDAH BISA NERIMA GAMBAR) ---
+    public void TampilkanDialogBenda(string nama, string teks, Sprite gambarKarakter = null)
+    {
+        sedangDialog = true;
+        modeInteraksiBenda = true; // Kasih tahu sistem kalau ini cuma 1 baris
+        panelDialog.SetActive(true);
+
+        // Langsung ganti teksnya
+        if (teksNama != null) teksNama.text = nama;
+        if (teksDialog != null) teksDialog.text = teks;
+
+        // Logika memunculkan gambar
+        if (gambarKarakter != null)
+        {
+            // Kalau Pintunya ngirim gambar, nyalakan potret kiri!
+            if (potretKiri != null)
+            {
+                potretKiri.gameObject.SetActive(true);
+                potretKiri.sprite = gambarKarakter;
+            }
+            if (potretKanan != null) potretKanan.gameObject.SetActive(false);
+        }
+        else
+        {
+            // Kalau Pintunya gak ngirim gambar, matikan potretnya
+            if (potretKiri != null) potretKiri.gameObject.SetActive(false);
+            if (potretKanan != null) potretKanan.gameObject.SetActive(false);
+        }
+    }
+    // ------------------------------------------
+
     private void SelesaiDialog()
     {
         sedangDialog = false;
+        modeInteraksiBenda = false;
         panelDialog.SetActive(false);
-        Time.timeScale = 1f; // Waktu jalan lagi
     }
 }

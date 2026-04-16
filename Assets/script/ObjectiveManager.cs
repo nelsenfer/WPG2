@@ -1,4 +1,3 @@
-using System.Collections; // Wajib ditambah untuk fitur Timer (Coroutine)
 using UnityEngine;
 using TMPro;
 
@@ -15,10 +14,9 @@ public class ObjectiveManager : MonoBehaviour
     public TMP_Text teksMisiUI;    // ObjectiveText lama milikmu
     private bool isMisiOpen = false;
 
-    [Header("UI Notifikasi (Pojok Kiri Atas)")]
-    public GameObject panelNotifUI; // Panel/Teks baru untuk pop-up sekilas
-    public TMP_Text teksNotifUI;    // Teks di dalam pop-up tersebut
-    public float lamaNotifMuncul = 4f; // Berapa detik notifnya mejeng di layar
+    [Header("UI Notifikasi (HUD Permanen)")]
+    public GameObject panelNotifUI; // Panel ini sekarang bakal nyala terus
+    public TMP_Text teksNotifUI;    // Teks misi yang selalu mejeng di layar
 
     private void Awake()
     {
@@ -28,11 +26,13 @@ public class ObjectiveManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateUIMisi();
+        // Pastikan UI Notif (HUD) langsung NYALA sejak game dimulai
+        if (panelNotifUI != null) panelNotifUI.SetActive(true);
 
-        // Sembunyikan semua UI Misi saat game baru dimulai
+        // Sembunyikan UI Misi Detail (yang pakai Tab) saat game baru dimulai
         if (panelMisiUI != null) { isMisiOpen = false; panelMisiUI.SetActive(false); }
-        if (panelNotifUI != null) panelNotifUI.SetActive(false);
+
+        UpdateUIMisi();
     }
 
     private void Update()
@@ -53,12 +53,8 @@ public class ObjectiveManager : MonoBehaviour
         indeksMisiSaatIni++;
         UpdateUIMisi();
 
-        // Fitur Tambahan: Munculkan Notifikasi Pop-up Pojok Kiri
-        if (panelNotifUI != null)
-        {
-            StopAllCoroutines(); // Reset timer jaga-jaga kalau misi beruntun cepat
-            StartCoroutine(MunculkanNotifSekilas());
-        }
+        // Kita HAPUS pemanggilan timer/coroutine di sini,
+        // karena UpdateUIMisi() di atas udah otomatis mengganti teksnya.
     }
 
     public void UpdateUIMisi()
@@ -69,15 +65,7 @@ public class ObjectiveManager : MonoBehaviour
         // Update teks di Panel Tab
         if (teksMisiUI != null) teksMisiUI.text = "Objective:\n- " + kalimatMisi;
 
-        // Update teks di Pop-up Pojok Kiri
-        if (teksNotifUI != null) teksNotifUI.text = "Update Misi:\n" + kalimatMisi;
-    }
-
-    // Ini adalah fungsi Timer pengatur waktu pop-up
-    private IEnumerator MunculkanNotifSekilas()
-    {
-        panelNotifUI.SetActive(true); // Nyalakan UI Pojok Kiri
-        yield return new WaitForSeconds(lamaNotifMuncul); // Tunggu selama 4 detik
-        panelNotifUI.SetActive(false); // Matikan lagi UI Pojok Kiri
+        // Update teks di Notif Pojok (HUD)
+        if (teksNotifUI != null) teksNotifUI.text = "Misi Saat Ini:\n" + kalimatMisi;
     }
 }

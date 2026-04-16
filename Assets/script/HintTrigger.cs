@@ -8,18 +8,24 @@ public class HintTrigger : MonoBehaviour
 
     [Header("Pengaturan Tampilan")]
     public bool gunakanPanelBesar = false;
-    public bool bekukanGame = false; // <-- CENTANG INI BIAR GAMENYA BERHENTI!
+    public bool bekukanGame = false;
     public bool hapusSetelahDilewati = false;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private bool sedangAktif = false; // Penanda biar gak ter-trigger berkali-kali
+
+    // UBAH JADI STAY: Bakal ngecek terus selama Player berdiri di dalam kotak
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && HintManager.instance != null)
+        // 1. Kalau lagi ada dialog, JANGAN ngapa-ngapain dulu! Tunggu sampai kelar.
+        if (DialogManager.instance != null && DialogManager.instance.sedangDialog) return;
+
+        // 2. Kalau dialog udah kelar dan hint belum aktif, baru munculin!
+        if (!sedangAktif && collision.CompareTag("Player") && HintManager.instance != null)
         {
-            // Kirim status bekukanGame ke manager
+            sedangAktif = true;
             HintManager.instance.TampilkanHint(pesanHint, ikonTombol, gunakanPanelBesar, bekukanGame);
 
-            // Kalau gamenya beku, trigger ini langsung kita hancurkan (jika dicentang) 
-            // biar pas game jalan lagi gak kepanggil dua kali
+            // Kita biarkan objeknya hancur, karena ini tutorial sekali pakai
             if (bekukanGame && hapusSetelahDilewati)
             {
                 Destroy(gameObject);
@@ -29,11 +35,10 @@ public class HintTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        // Hanya matikan panel kalau gamenya TIDAK beku. 
-        // (Kalau beku, panel dimatikan oleh tombol Enter di HintManager).
         if (!bekukanGame && collision.CompareTag("Player") && HintManager.instance != null)
         {
             HintManager.instance.SembunyikanSemuaHint();
+            sedangAktif = false; // Reset
 
             if (hapusSetelahDilewati)
             {

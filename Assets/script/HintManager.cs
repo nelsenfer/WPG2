@@ -17,8 +17,8 @@ public class HintManager : MonoBehaviour
     public TMP_Text teksHintBesar;
     public Image iconHintBesar;
 
-    // Variabel buat ngetrack apakah game lagi di-pause
-    private bool gameSedangPause = false;
+    // UBAH JADI PUBLIC: Biar Player tau kalau tutorial lagi menghalangi layar
+    public bool gameSedangPause = false;
 
     private void Awake()
     {
@@ -33,17 +33,17 @@ public class HintManager : MonoBehaviour
 
     private void Update()
     {
-        // Kalau game lagi di-pause, tunggu pemain pencet Enter atau Spasi
         if (gameSedangPause)
         {
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
+            // --- INI YANG DI-UPDATE ---
+            // KeyCode.Space dihapus, diganti jadi Input.GetMouseButtonDown(0) untuk Klik Kiri
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetMouseButtonDown(0))
             {
                 LanjutkanGame();
             }
         }
     }
 
-    // Tambahan: Ada parameter baru "bekukanGame"
     public void TampilkanHint(string pesan, Sprite iconTombol = null, bool pakaiPanelBesar = false, bool bekukanGame = false)
     {
         StopAllCoroutines();
@@ -69,11 +69,10 @@ public class HintManager : MonoBehaviour
             }
         }
 
-        // Kalau dicentang "bekukanGame", maka waktu dihentikan!
+        // Kalau trigger-nya diset "bekukanGame" di Inspector
         if (bekukanGame)
         {
-            Time.timeScale = 0f; // Menghentikan semua pergerakan/fisika
-            gameSedangPause = true;
+            gameSedangPause = true; // Kita nyalakan flag-nya (tanpa Time.timeScale = 0)
         }
     }
 
@@ -83,11 +82,9 @@ public class HintManager : MonoBehaviour
         if (hintPanelBesar != null) hintPanelBesar.SetActive(false);
     }
 
-    // Fungsi untuk memutar waktu kembali saat tombol ditekan
     private void LanjutkanGame()
     {
-        Time.timeScale = 1f; // Kembalikan kecepatan waktu jadi normal (1)
         gameSedangPause = false;
-        SembunyikanSemuaHint(); // Langsung tutup panelnya
+        SembunyikanSemuaHint();
     }
 }

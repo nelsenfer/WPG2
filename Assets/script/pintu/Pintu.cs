@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class Pintu : MonoBehaviour
 {
@@ -15,12 +14,13 @@ public class Pintu : MonoBehaviour
     public GameObject itemRahasia;
     private bool pertamaKaliDicek = true;
 
-    [Header("Pengaturan UI & Dialog")]
-    public GameObject panelDialogUI;
-    public TMP_Text teksDialogUI;
+    // UI DIALOG MANUAL DIHAPUS DARI SINI KARENA SUDAH DIURUS DIALOGMANAGER!
 
+    [Header("Pengaturan UI & Dialog")]
     [HideInInspector]
     public GameObject promptUI;
+
+    public Sprite potretMC;
 
     public string dialogTerkunci = "Terkunci. Kurasa aku harus mencari kuncinya di sekitar sini.";
     public string dialogSalahItem = "Item ini tidak cocok di sini.";
@@ -40,6 +40,9 @@ public class Pintu : MonoBehaviour
 
     void Update()
     {
+        // PENCEGAHAN GANDA: Kalau lagi dialog, tombol 'E' di pintu diabaikan dulu
+        if (DialogManager.instance != null && DialogManager.instance.sedangDialog) return;
+
         if (playerDiDalam && Input.GetKeyDown(KeyCode.E))
         {
             if (isLocked)
@@ -55,9 +58,7 @@ public class Pintu : MonoBehaviour
                 }
 
                 // =================================================================
-                // [MODE 1] AUTO GELEDAH TAS SAAT TEKAN 'E' (SAAT INI SEDANG AKTIF)
-                // Jika ingin pakai Mode 2, matikan Mode 1 ini dengan cara menambahkan
-                // tanda /* di atas tulisan Inventory dan tanda */ di akhir blok ini.
+                // [MODE 1] AUTO GELEDAH TAS SAAT TEKAN 'E'
                 // =================================================================
 
                 Inventory tasPlayer = FindFirstObjectByType<Inventory>();
@@ -88,22 +89,6 @@ public class Pintu : MonoBehaviour
                 {
                     TampilkanDialog(dialogTerkunci);
                 }
-
-                // =================================================================
-                // [AKHIR DARI MODE 1]
-                // =================================================================
-
-
-                // =================================================================
-                // [MODE 2] MANUAL BUKA DARI DALAM TAS (SAAT INI DIMATIKAN/DICOMMENT)
-                // Jika ingin pakai Mode 2: Hapus tanda /* dan */ yang mengapit kode di bawah ini,
-                // lalu matikan blok Mode 1 di atas.
-                // =================================================================
-                /*
-                TampilkanDialog("Pintu masih terkunci. Aku harus menggunakan kuncinya dari dalam tas.");
-                */
-                // =================================================================
-
             }
             else
             {
@@ -112,16 +97,12 @@ public class Pintu : MonoBehaviour
                 {
                     if (promptUI != null) promptUI.SetActive(false);
                     playerTransform.position = titikTujuan.position;
-                    TampilkanDialog("");
+                    // TampilkanDialog(""); <- Dihapus karena nggak perlu tutup paksa
                 }
             }
         }
     }
 
-    // =================================================================
-    // FUNGSI KHUSUS UNTUK MODE 2 (DIPANGGIL OLEH SCRIPT INVENTORY)
-    // Biarkan saja ini menyala, tidak akan error meskipun kamu sedang pakai Mode 1.
-    // =================================================================
     public bool TerimaItem(ItemData itemYangDiberikan)
     {
         if (!isLocked)
@@ -160,7 +141,6 @@ public class Pintu : MonoBehaviour
             playerDiDalam = true;
             playerTransform = collision.transform;
 
-            // Penting untuk Mode 2: Memberitahu tas bahwa pemain sedang di dekat pintu ini
             Inventory tasPlayer = FindFirstObjectByType<Inventory>();
             if (tasPlayer != null) tasPlayer.pintuTerdekat = this;
 
@@ -174,25 +154,20 @@ public class Pintu : MonoBehaviour
         {
             playerDiDalam = false;
 
-            // Memutus koneksi dengan tas saat pemain menjauh
             Inventory tasPlayer = FindFirstObjectByType<Inventory>();
             if (tasPlayer != null) tasPlayer.pintuTerdekat = null;
 
-            TampilkanDialog("");
             if (promptUI != null) promptUI.SetActive(false);
         }
     }
 
+    // --- FUNGSI INI KITA ROMBAK TOTAL BIAR TERSAMBUNG KE DIALOGMANAGER ---
     private void TampilkanDialog(string pesan)
     {
-        if (panelDialogUI != null && teksDialogUI != null)
+        if (DialogManager.instance != null)
         {
-            if (pesan == "") panelDialogUI.SetActive(false);
-            else
-            {
-                panelDialogUI.SetActive(true);
-                teksDialogUI.text = pesan;
-            }
+            // Sekarang kita ikut mengirimkan potretMC ke DialogManager
+            DialogManager.instance.TampilkanDialogBenda("Taku", pesan, potretMC);
         }
     }
 }

@@ -29,9 +29,7 @@ public class Inventory : MonoBehaviour
         // KODE ASLIMU KEMBALI: Pakai tombol I untuk buka tas
         if (Input.GetKeyDown(KeyCode.I))
         {
-            isOpen = !isOpen;
-            inventoryPanel.SetActive(isOpen);
-            if (isOpen) UpdateInventoryUI();
+            ToggleInventory(); // Panggil fungsi baru di bawah!
         }
 
         if (isOpen && itemList.Count > 0)
@@ -125,5 +123,12 @@ public class Inventory : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void ToggleInventory()
+    {
+        isOpen = !isOpen;
+        inventoryPanel.SetActive(isOpen);
+        if (isOpen) UpdateInventoryUI();
     }
 }
