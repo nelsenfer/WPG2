@@ -38,6 +38,11 @@ public class PickupItem : MonoBehaviour
                 tasPlayer.AddItem(itemData);
                 Debug.Log($"[DEBUG ITEM] {itemData.itemName} masuk tas!");
 
+                if (itemData.isKertasCatatan && DocumentManager.instance != null)
+                {
+                    DocumentManager.instance.BukaKertas(itemData.isiKertas);
+                }
+
                 // --- PENGAMAN LAPIS DUA ---
                 if (selesaikanMisiSaatDipungut && ObjectiveManager.instance != null)
                 {

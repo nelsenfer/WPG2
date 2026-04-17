@@ -82,6 +82,21 @@ public class Inventory : MonoBehaviour
     void UseItem()
     {
         ItemData itemToUse = itemList[selectedIndex].data;
+
+        // --- LOGIKA BARU: CEK KALAU ITEM INI KERTAS ---
+        if (itemToUse.isKertasCatatan)
+        {
+            // Buka Pop-up Kertas!
+            if (DocumentManager.instance != null)
+            {
+                DocumentManager.instance.BukaKertas(itemToUse.isiKertas);
+            }
+            // RETURN dipakai buat MENGHENTIKAN fungsi di sini. 
+            // Jadi kode pintu dan hapus item di bawahnya GAK AKAN DIJALANKAN.
+            return;
+        }
+        // ----------------------------------------------
+
         bool itemTerpakai = false;
 
         if (pintuTerdekat != null)
