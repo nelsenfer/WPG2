@@ -14,8 +14,6 @@ public class Pintu : MonoBehaviour
     public GameObject itemRahasia;
     private bool pertamaKaliDicek = true;
 
-    // UI DIALOG MANUAL DIHAPUS DARI SINI KARENA SUDAH DIURUS DIALOGMANAGER!
-
     [Header("Pengaturan UI & Dialog")]
     [HideInInspector]
     public GameObject promptUI;
@@ -27,6 +25,10 @@ public class Pintu : MonoBehaviour
 
     private bool playerDiDalam = false;
     private Transform playerTransform;
+
+    [Header("Gembok Angka (Numpad)")]
+    public bool pakaiGembokAngka = false; // Centang ini kalau pintu pakai password
+    public string passwordGembok = "1234";
 
     void Start()
     {
@@ -40,27 +42,33 @@ public class Pintu : MonoBehaviour
 
     void Update()
     {
-        // PENCEGAHAN GANDA: Kalau lagi dialog, tombol 'E' di pintu diabaikan dulu
         if (DialogManager.instance != null && DialogManager.instance.sedangDialog) return;
 
         if (playerDiDalam && Input.GetKeyDown(KeyCode.E))
         {
             if (isLocked)
             {
-                // EVENT PERTAMA KALI CEK PINTU (Misi 0 -> Misi 1)
+                // 1. CEK EVENT PERTAMA KALI
                 if (pertamaKaliDicek)
                 {
                     pertamaKaliDicek = false;
                     if (itemRahasia != null) itemRahasia.SetActive(true);
                     if (ObjectiveManager.instance != null) ObjectiveManager.instance.LanjutMisi();
                     TampilkanDialog(dialogTerkunci);
-                    return;
+                    return; // Return kosongan di sini aman, karena fungsi Update() itu void
                 }
 
-                // =================================================================
-                // [MODE 1] AUTO GELEDAH TAS SAAT TEKAN 'E'
-                // =================================================================
+                // 2. CEK GEMBOK ANGKA DULU (INI YANG TADI KAMU LUPA MASUKIN)
+                if (pakaiGembokAngka)
+                {
+                    if (NumpadManager.instance != null)
+                    {
+                        NumpadManager.instance.BukaNumpad(passwordGembok, this);
+                    }
+                    return; // Hentikan script di sini, jangan lanjut ngecek isi tas
+                }
 
+                // 3. CEK KUNCI DARI TAS
                 Inventory tasPlayer = FindFirstObjectByType<Inventory>();
                 bool punyaSemuaKunci = true;
 
@@ -97,7 +105,6 @@ public class Pintu : MonoBehaviour
                 {
                     if (promptUI != null) promptUI.SetActive(false);
                     playerTransform.position = titikTujuan.position;
-                    // TampilkanDialog(""); <- Dihapus karena nggak perlu tutup paksa
                 }
             }
         }
@@ -109,6 +116,13 @@ public class Pintu : MonoBehaviour
         {
             TampilkanDialog("Pintu ini sudah tidak terkunci.");
             return false;
+        }
+
+        // --- INI PERBAIKAN ERROR-NYA ---
+        if (pakaiGembokAngka)
+        {
+            TampilkanDialog("Pintu ini dikunci menggunakan gembok angka, bukan kunci biasa.");
+            return false; // WAJIB ada kata false!
         }
 
         if (syaratItem.Contains(itemYangDiberikan))
@@ -161,12 +175,17 @@ public class Pintu : MonoBehaviour
         }
     }
 
-    // --- FUNGSI INI KITA ROMBAK TOTAL BIAR TERSAMBUNG KE DIALOGMANAGER ---
+    public void BukaKunciSukses()
+    {
+        isLocked = false;
+        TampilkanDialog("Klik! Gembok terbuka.");
+        if (ObjectiveManager.instance != null) ObjectiveManager.instance.LanjutMisi();
+    }
+
     private void TampilkanDialog(string pesan)
     {
         if (DialogManager.instance != null)
         {
-            // Sekarang kita ikut mengirimkan potretMC ke DialogManager
             DialogManager.instance.TampilkanDialogBenda("Taku", pesan, potretMC);
         }
     }

@@ -73,6 +73,18 @@ public class DialogManager : MonoBehaviour
         TampilkanKalimat(alurCerita[indexKalimat]);
     }
 
+    public void MulaiDialogNPC(BarisDialog[] percakapanBaru)
+    {
+        alurCerita = percakapanBaru; // Ganti naskah dengan naskah milik NPC
+        sedangDialog = true;
+        modeInteraksiBenda = false;
+        panelDialog.SetActive(true);
+        indexKalimat = 0;
+
+        // Langsung tampilkan kalimat pertama dari NPC
+        TampilkanKalimat(alurCerita[indexKalimat]);
+    }
+
     public void LanjutKeKalimatBerikutnya()
     {
         indexKalimat++;

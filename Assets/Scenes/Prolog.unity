@@ -440,7 +440,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teksPrologue: {fileID: 365590204}
-  alurCerita: []
+  alurCerita:
+  - "Tachibana Takumi atau biasa dipanggil Taku datang dengan kamera di tangan,\n
+    mencari sesuatu yang tak semua orang berani dekati."
+  - "Sebuah mansion tua berdiri dalam diam. \nSunyi, namun terasa\u2026 tidak pernah
+    benar-benar kosong."
+  - 'Ia melangkah masuk, seperti biasa.
+
+    Merekam setiap sudut, setiap jejak yang
+    tertinggal.'
+  - 'Namun di balik keheningan itu,
+
+    ada sesuatu yang memperhatikan.'
+  - "Sesuatu yang pernah hidup\u2026 dan belum pergi."
+  - 'Semakin jauh ia melangkah,
+
+    semakin terasa ia tidak sendirian.'
+  - Akankah Taku menemukan kebenaran di balik mansion ini?
   kecepatanKetik: 0.05
   namaSceneGame: MAP 1 R1
 --- !u!4 &1180644953
