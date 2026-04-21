@@ -1,34 +1,35 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Pintu : MonoBehaviour
 {
     [Header("Pengaturan Pintu / Teleport")]
-    public bool isLocked = true;
+    public bool isLocked;
     public Transform titikTujuan;
 
     [Header("Syarat Item")]
-    public List<ItemData> syaratItem = new List<ItemData>();
+    public ItemData[] syaratItem;
 
     [Header("Event Cerita")]
     public GameObject itemRahasia;
-    private bool pertamaKaliDicek = true;
-
-    [Header("Pengaturan UI & Dialog")]
-    [HideInInspector]
-    public GameObject promptUI;
-
     public Sprite potretMC;
+    [TextArea] public string dialogTerkunci;
+    [TextArea] public string dialogSalahItem;
 
-    public string dialogTerkunci = "Terkunci. Kurasa aku harus mencari kuncinya di sekitar sini.";
-    public string dialogSalahItem = "Item ini tidak cocok di sini.";
-
-    private bool playerDiDalam = false;
-    private Transform playerTransform;
+    [Header("Pengaturan Misi")]
+    public bool pertamaKaliDicek = true;
+    public bool updateMisiSaatDicek = false;
+    // public int misiYangDiharapkan = 0; // Disimpan dulu buat jaga-jaga kalau nanti butuh
 
     [Header("Gembok Angka (Numpad)")]
-    public bool pakaiGembokAngka = false; // Centang ini kalau pintu pakai password
-    public string passwordGembok = "1234";
+    public bool pakaiGembokAngka;
+    public string passwordGembok;
+
+    [Header("UI Bantuan")]
+    public GameObject promptUI;
+
+    private bool playerDiDekat = false;
+
+    private bool nungguDialogKeluar = false;
 
     void Start()
     {
@@ -42,109 +43,142 @@ public class Pintu : MonoBehaviour
 
     void Update()
     {
-        if (DialogManager.instance != null && DialogManager.instance.sedangDialog) return;
-
-        if (playerDiDalam && Input.GetKeyDown(KeyCode.E))
+        // --- FITUR BARU: NUNGGU DIALOG SELESAI BARU LANJUT MISI ---
+        if (nungguDialogKeluar && DialogManager.instance != null)
         {
-            if (isLocked)
+            // Kalau kotak dialognya SUDAH DITUTUP (sedangDialog = false)
+            if (DialogManager.instance.sedangDialog == false)
             {
-                // 1. CEK EVENT PERTAMA KALI
-                if (pertamaKaliDicek)
-                {
-                    pertamaKaliDicek = false;
-                    if (itemRahasia != null) itemRahasia.SetActive(true);
-                    if (ObjectiveManager.instance != null) ObjectiveManager.instance.LanjutMisi();
-                    TampilkanDialog(dialogTerkunci);
-                    return; // Return kosongan di sini aman, karena fungsi Update() itu void
-                }
+                nungguDialogKeluar = false; // Matikan mode nunggu
 
-                // 2. CEK GEMBOK ANGKA DULU (INI YANG TADI KAMU LUPA MASUKIN)
-                if (pakaiGembokAngka)
+                // BARU LANJUTKAN MISINYA SEKARANG!
+                if (updateMisiSaatDicek && ObjectiveManager.instance != null)
                 {
-                    if (NumpadManager.instance != null)
-                    {
-                        NumpadManager.instance.BukaNumpad(passwordGembok, this);
-                    }
-                    return; // Hentikan script di sini, jangan lanjut ngecek isi tas
-                }
-
-                // 3. CEK KUNCI DARI TAS
-                Inventory tasPlayer = FindFirstObjectByType<Inventory>();
-                bool punyaSemuaKunci = true;
-
-                if (tasPlayer != null && syaratItem.Count > 0)
-                {
-                    foreach (ItemData itemSyarat in syaratItem)
-                    {
-                        if (tasPlayer.CekPunyaItem(itemSyarat) == false)
-                        {
-                            punyaSemuaKunci = false;
-                            break;
-                        }
-                    }
-                }
-                else { punyaSemuaKunci = false; }
-
-                if (punyaSemuaKunci)
-                {
-                    foreach (ItemData itemSyarat in syaratItem) { tasPlayer.HapusItemDiamDiam(itemSyarat); }
-                    syaratItem.Clear();
-                    isLocked = false;
-                    TampilkanDialog("Kunci pas! Klik... Pintu berhasil dibuka.");
-                    if (ObjectiveManager.instance != null) ObjectiveManager.instance.LanjutMisi();
-                }
-                else
-                {
-                    TampilkanDialog(dialogTerkunci);
+                    ObjectiveManager.instance.LanjutMisi();
                 }
             }
-            else
-            {
-                // JIKA PINTU SUDAH TERBUKA -> TELEPORT
-                if (titikTujuan != null)
-                {
-                    if (promptUI != null) promptUI.SetActive(false);
-                    playerTransform.position = titikTujuan.position;
-                }
-            }
+        }
+
+        // Kalau lagi ngobrol atau buka brankas, tombol E nggak berfungsi
+        if (DialogManager.instance != null && DialogManager.instance.sedangDialog) return;
+        if (NumpadManager.instance != null && NumpadManager.instance.sedangBukaGembok) return;
+
+        if (playerDiDekat && Input.GetKeyDown(KeyCode.E))
+        {
+            Interaksi();
         }
     }
 
-    public bool TerimaItem(ItemData itemYangDiberikan)
+    void Interaksi()
     {
-        if (!isLocked)
+        if (isLocked)
         {
-            TampilkanDialog("Pintu ini sudah tidak terkunci.");
-            return false;
-        }
-
-        // --- INI PERBAIKAN ERROR-NYA ---
-        if (pakaiGembokAngka)
-        {
-            TampilkanDialog("Pintu ini dikunci menggunakan gembok angka, bukan kunci biasa.");
-            return false; // WAJIB ada kata false!
-        }
-
-        if (syaratItem.Contains(itemYangDiberikan))
-        {
-            syaratItem.Remove(itemYangDiberikan);
-
-            if (syaratItem.Count == 0)
+            // --- 1. UPDATE MISI (Ditaruh paling atas biar gak kena blokir 'return') ---
+            if (pertamaKaliDicek)
             {
-                isLocked = false;
-                TampilkanDialog("Kunci pas! Klik... Pintu berhasil dibuka.");
-                if (ObjectiveManager.instance != null) ObjectiveManager.instance.LanjutMisi();
+                pertamaKaliDicek = false; // Matikan saklar ingatan pintu ini
+                nungguDialogKeluar = true; // Kasih aba-aba suruh nunggu dialog selesai!
             }
-            else
+
+            // --- 2. CEK GEMBOK ANGKA ---
+            if (pakaiGembokAngka && NumpadManager.instance != null)
             {
-                TampilkanDialog($"Menggunakan {itemYangDiberikan.itemName}. Butuh sesuatu yang lain lagi...");
+                NumpadManager.instance.BukaNumpad(passwordGembok, this);
+                return;
             }
-            return true; // Item terpakai
+
+            // --- 3. CEK SYARAT ITEM (Pintu Kunci) ---
+            if (syaratItem.Length > 0)
+            {
+                if (CekPunyaItemDiTas())
+                {
+                    BukaPintu();
+                }
+                else
+                {
+                    // Kalau pertama kali dicek, dialognya bisa ngambil dari dialogSalahItem
+                    MunculkanDialog(dialogSalahItem);
+                }
+                return; // Stop baca kode di bawah
+            }
+
+            // --- 4. PINTU MENTOK CERITA (Tanpa Kunci) ---
+            MunculkanDialog(dialogTerkunci);
         }
         else
         {
-            TampilkanDialog(dialogSalahItem);
-            return false; // Item ditolak
+            // PINTU GAK DIKUNCI
+            BukaPintu();
+        }
+    }
+
+    public void BukaPintu()
+    {
+        isLocked = false;
+        if (itemRahasia != null) itemRahasia.SetActive(true);
+
+        if (titikTujuan != null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null) player.transform.position = titikTujuan.position;
+        }
+    }
+
+    // --- JEMBATAN UNTUK NUMPAD ---
+    public void BukaKunciSukses()
+    {
+        BukaPintu();
+    }
+
+    // --- JEMBATAN UNTUK TAS (INVENTORY) ---
+    public bool TerimaItem(ItemData itemDipakai)
+    {
+        if (!isLocked) return false;
+
+        foreach (ItemData itemButuh in syaratItem)
+        {
+            if (itemButuh == itemDipakai)
+            {
+                BukaPintu();
+                return true;
+            }
+        }
+        MunculkanDialog(dialogSalahItem);
+        return false;
+    }
+
+    bool CekPunyaItemDiTas()
+    {
+        Inventory tas = FindFirstObjectByType<Inventory>();
+        if (tas == null) return false;
+
+        foreach (ItemData itemButuh in syaratItem)
+        {
+            bool ketemu = false;
+            foreach (ItemSlot slot in tas.itemList) // <- Udah diperbaiki jadi ItemSlot!
+            {
+                if (slot.data == itemButuh)
+                {
+                    ketemu = true;
+                    break;
+                }
+            }
+            if (!ketemu) return false;
+        }
+        return true;
+    }
+
+    void MunculkanDialog(string teks)
+    {
+        if (DialogManager.instance != null)
+        {
+            BarisDialog[] naskahTunggal = new BarisDialog[1];
+            naskahTunggal[0] = new BarisDialog();
+            naskahTunggal[0].namaKarakter = "Taku";
+            naskahTunggal[0].isiTeks = teks;
+            naskahTunggal[0].potretKarakter = potretMC;
+            naskahTunggal[0].potretDiKiri = true;
+            DialogManager.instance.MulaiDialogNPC(naskahTunggal);
         }
     }
 
@@ -152,12 +186,7 @@ public class Pintu : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            playerDiDalam = true;
-            playerTransform = collision.transform;
-
-            Inventory tasPlayer = FindFirstObjectByType<Inventory>();
-            if (tasPlayer != null) tasPlayer.pintuTerdekat = this;
-
+            playerDiDekat = true;
             if (promptUI != null) promptUI.SetActive(true);
         }
     }
@@ -166,27 +195,8 @@ public class Pintu : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            playerDiDalam = false;
-
-            Inventory tasPlayer = FindFirstObjectByType<Inventory>();
-            if (tasPlayer != null) tasPlayer.pintuTerdekat = null;
-
+            playerDiDekat = false;
             if (promptUI != null) promptUI.SetActive(false);
-        }
-    }
-
-    public void BukaKunciSukses()
-    {
-        isLocked = false;
-        TampilkanDialog("Klik! Gembok terbuka.");
-        if (ObjectiveManager.instance != null) ObjectiveManager.instance.LanjutMisi();
-    }
-
-    private void TampilkanDialog(string pesan)
-    {
-        if (DialogManager.instance != null)
-        {
-            DialogManager.instance.TampilkanDialogBenda("Taku", pesan, potretMC);
         }
     }
 }
