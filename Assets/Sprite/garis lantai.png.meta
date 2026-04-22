@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: f7ff11def81777c439f0cbf8b4143509
+guid: 82336e9e38c807d42924e6f18155f9e8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6610512681880675534
-    second: Bakeneko miaw miaw_0
-  - first:
-      213: -8954744767420462749
-    second: Bakeneko miaw miaw_1
-  - first:
-      213: 611762788254083926
-    second: Bakeneko miaw miaw_2
-  - first:
-      213: -8927411526071482942
-    second: Bakeneko miaw miaw_3
+      213: -5565325884729785360
+    second: garis lantai_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -135,89 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bakeneko miaw miaw_0
+      name: garis lantai_0
       rect:
         serializedVersion: 2
-        x: 94
-        y: 249
-        width: 1178
-        height: 1061
+        x: 34
+        y: 213
+        width: 2037
+        height: 1678
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ec466ba92424dbb50800000000000000
-      internalID: 6610512681880675534
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bakeneko miaw miaw_1
-      rect:
-        serializedVersion: 2
-        x: 1272
-        y: 259
-        width: 1060
-        height: 1060
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3698d9b041b5ab380800000000000000
-      internalID: -8954744767420462749
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bakeneko miaw miaw_2
-      rect:
-        serializedVersion: 2
-        x: 2459
-        y: 249
-        width: 1107
-        height: 1061
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 65befa0c30b6d7800800000000000000
-      internalID: 611762788254083926
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bakeneko miaw miaw_3
-      rect:
-        serializedVersion: 2
-        x: 3605
-        y: 0
-        width: 1361
-        height: 1910
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2c508c834867b1480800000000000000
-      internalID: -8927411526071482942
+      spriteID: 0f3056d189df3c2b0800000000000000
+      internalID: -5565325884729785360
       vertices: []
       indices: 
       edges: []
@@ -226,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: acf49728297a2074c9c508a384bbc888
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -236,10 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Bakeneko miaw miaw_0: 6610512681880675534
-      Bakeneko miaw miaw_1: -8954744767420462749
-      Bakeneko miaw miaw_2: 611762788254083926
-      Bakeneko miaw miaw_3: -8927411526071482942
+      garis lantai_0: -5565325884729785360
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

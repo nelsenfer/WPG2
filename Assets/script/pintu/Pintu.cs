@@ -17,8 +17,12 @@ public class Pintu : MonoBehaviour
 
     [Header("Pengaturan Misi")]
     public bool pertamaKaliDicek = true;
+
+    [Tooltip("Centang ini jika misi ganti saat GAGAL BUKA (Terkunci)")]
     public bool updateMisiSaatDicek = false;
-    // public int misiYangDiharapkan = 0; // Disimpan dulu buat jaga-jaga kalau nanti butuh
+
+    [Tooltip("Centang ini jika misi ganti saat BERHASIL MASUK/BUKA")]
+    public bool updateMisiSaatMasuk = false;
 
     [Header("Gembok Angka (Numpad)")]
     public bool pakaiGembokAngka;
@@ -28,7 +32,6 @@ public class Pintu : MonoBehaviour
     public GameObject promptUI;
 
     private bool playerDiDekat = false;
-
     private bool nungguDialogKeluar = false;
 
     void Start()
@@ -43,15 +46,13 @@ public class Pintu : MonoBehaviour
 
     void Update()
     {
-        // --- FITUR BARU: NUNGGU DIALOG SELESAI BARU LANJUT MISI ---
+        // Fitur Misi 1 (Update Misi setelah dialog terkunci ditutup)
         if (nungguDialogKeluar && DialogManager.instance != null)
         {
-            // Kalau kotak dialognya SUDAH DITUTUP (sedangDialog = false)
             if (DialogManager.instance.sedangDialog == false)
             {
-                nungguDialogKeluar = false; // Matikan mode nunggu
+                nungguDialogKeluar = false;
 
-                // BARU LANJUTKAN MISINYA SEKARANG!
                 if (updateMisiSaatDicek && ObjectiveManager.instance != null)
                 {
                     ObjectiveManager.instance.LanjutMisi();
@@ -59,7 +60,6 @@ public class Pintu : MonoBehaviour
             }
         }
 
-        // Kalau lagi ngobrol atau buka brankas, tombol E nggak berfungsi
         if (DialogManager.instance != null && DialogManager.instance.sedangDialog) return;
         if (NumpadManager.instance != null && NumpadManager.instance.sedangBukaGembok) return;
 
@@ -73,21 +73,18 @@ public class Pintu : MonoBehaviour
     {
         if (isLocked)
         {
-            // --- 1. UPDATE MISI (Ditaruh paling atas biar gak kena blokir 'return') ---
             if (pertamaKaliDicek)
             {
-                pertamaKaliDicek = false; // Matikan saklar ingatan pintu ini
-                nungguDialogKeluar = true; // Kasih aba-aba suruh nunggu dialog selesai!
+                pertamaKaliDicek = false;
+                nungguDialogKeluar = true;
             }
 
-            // --- 2. CEK GEMBOK ANGKA ---
             if (pakaiGembokAngka && NumpadManager.instance != null)
             {
                 NumpadManager.instance.BukaNumpad(passwordGembok, this);
                 return;
             }
 
-            // --- 3. CEK SYARAT ITEM (Pintu Kunci) ---
             if (syaratItem.Length > 0)
             {
                 if (CekPunyaItemDiTas())
@@ -96,18 +93,15 @@ public class Pintu : MonoBehaviour
                 }
                 else
                 {
-                    // Kalau pertama kali dicek, dialognya bisa ngambil dari dialogSalahItem
                     MunculkanDialog(dialogSalahItem);
                 }
-                return; // Stop baca kode di bawah
+                return;
             }
 
-            // --- 4. PINTU MENTOK CERITA (Tanpa Kunci) ---
             MunculkanDialog(dialogTerkunci);
         }
         else
         {
-            // PINTU GAK DIKUNCI
             BukaPintu();
         }
     }
@@ -117,6 +111,13 @@ public class Pintu : MonoBehaviour
         isLocked = false;
         if (itemRahasia != null) itemRahasia.SetActive(true);
 
+        // --- FITUR BARU UNTUK MISI 8 KE 9 ---
+        if (updateMisiSaatMasuk && ObjectiveManager.instance != null)
+        {
+            ObjectiveManager.instance.LanjutMisi();
+            updateMisiSaatMasuk = false; // Matikan biar gak ke-trigger berulang kali
+        }
+
         if (titikTujuan != null)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -124,13 +125,11 @@ public class Pintu : MonoBehaviour
         }
     }
 
-    // --- JEMBATAN UNTUK NUMPAD ---
     public void BukaKunciSukses()
     {
         BukaPintu();
     }
 
-    // --- JEMBATAN UNTUK TAS (INVENTORY) ---
     public bool TerimaItem(ItemData itemDipakai)
     {
         if (!isLocked) return false;
@@ -155,7 +154,7 @@ public class Pintu : MonoBehaviour
         foreach (ItemData itemButuh in syaratItem)
         {
             bool ketemu = false;
-            foreach (ItemSlot slot in tas.itemList) // <- Udah diperbaiki jadi ItemSlot!
+            foreach (ItemSlot slot in tas.itemList)
             {
                 if (slot.data == itemButuh)
                 {
