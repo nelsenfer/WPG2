@@ -20,6 +20,9 @@ public class EventDialogBakeneko : MonoBehaviour
     [HideInInspector]
     public GameObject promptUI;
 
+    [Header("Pengaturan Trigger")]
+    public bool mulaiOtomatisSaatNginjek = false;
+
     private int pilihanPemain = 0;
     private bool sudahMulai = false;
     private bool playerDiDekat = false;
@@ -51,7 +54,16 @@ public class EventDialogBakeneko : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerDiDekat = true;
-            if (promptUI != null && !sudahMulai) promptUI.SetActive(true);
+
+            // Kalau centang auto-mulai nyala, Bakeneko langsung ngajak ngobrol!
+            if (mulaiOtomatisSaatNginjek && !sudahMulai)
+            {
+                StartCoroutine(MulaiDramaBakeneko());
+            }
+            else if (promptUI != null && !sudahMulai)
+            {
+                promptUI.SetActive(true);
+            }
         }
     }
 
