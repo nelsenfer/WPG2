@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d276304d48f951b479ec0a3aa9f2c07c, type: 3}
+  m_Name: Data_Surat4
+  m_EditorClassIdentifier: 
+  itemName: Surat 4
+  itemDescription: surat misterius
+  icon: {fileID: 0}
+  isKertasCatatan: 1
+  isiKertas: "Tidak semua yang berubah\u2026 <i>memilih untuk berubah.</i>\n\nAda
+    yang kehilangan dirinya\nkarena terlalu sering dilihat,\nnamun tidak pernah dipahami.\n\nPertanyaan
+    itu akan datang lagi.\nBukan untuk mencari jawaban,\ntapi untuk melihat <b>bagaimana
+    kau memandangnya.</b>\n\nJika saat itu tiba,\njangan hanya menjawab.\n<b>Pahami.</b>"

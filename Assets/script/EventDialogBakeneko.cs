@@ -1,12 +1,16 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems; // WAJIB DITAMBAHIN BUAT FITUR KEYBOARD
 
 public class EventDialogBakeneko : MonoBehaviour
 {
     [Header("UI Pilihan Ganda")]
     public GameObject panelPilihan;
 
-    // --- FITUR BARU: LACI GAMBAR ---
+    // --- FITUR BARU: FOKUS KEYBOARD ---
+    [Tooltip("Tarik tombol opsi pertama (atas) ke sini biar langsung kefokus")]
+    public GameObject tombolPertama;
+
     [Header("Potret Karakter (Wajib Diisi)")]
     public Sprite potretTaku;
     public Sprite potretBakeneko;
@@ -16,6 +20,9 @@ public class EventDialogBakeneko : MonoBehaviour
     public BarisDialog[] naskahBeriRoti;
     public BarisDialog[] naskahDiamSaja;
     public BarisDialog[] naskahPenutup;
+
+    [Header("Event Setelah Dialog")]
+    public GameObject bonekaMuncul;
 
     [HideInInspector]
     public GameObject promptUI;
@@ -30,6 +37,8 @@ public class EventDialogBakeneko : MonoBehaviour
     void Start()
     {
         if (panelPilihan != null) panelPilihan.SetActive(false);
+        if (bonekaMuncul != null) bonekaMuncul.SetActive(false);
+
         Canvas canvasChild = GetComponentInChildren<Canvas>(true);
         if (canvasChild != null)
         {
@@ -55,7 +64,6 @@ public class EventDialogBakeneko : MonoBehaviour
         {
             playerDiDekat = true;
 
-            // Kalau centang auto-mulai nyala, Bakeneko langsung ngajak ngobrol!
             if (mulaiOtomatisSaatNginjek && !sudahMulai)
             {
                 StartCoroutine(MulaiDramaBakeneko());
@@ -88,7 +96,19 @@ public class EventDialogBakeneko : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         yield return new WaitUntil(() => !DialogManager.instance.sedangDialog);
 
-        if (panelPilihan != null) panelPilihan.SetActive(true);
+        // --- FITUR FOKUS KEYBOARD DIMULAI ---
+        if (panelPilihan != null)
+        {
+            panelPilihan.SetActive(true);
+            if (tombolPertama != null)
+            {
+                // Bersihkan dulu memori pilihan sebelumnya
+                EventSystem.current.SetSelectedGameObject(null);
+                // Paksa Unity menyorot tombol pertama
+                EventSystem.current.SetSelectedGameObject(tombolPertama);
+            }
+        }
+
         if (DialogManager.instance != null) DialogManager.instance.sedangDialog = true;
 
         yield return new WaitUntil(() => pilihanPemain != 0);
@@ -104,9 +124,14 @@ public class EventDialogBakeneko : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         yield return new WaitUntil(() => !DialogManager.instance.sedangDialog);
 
+        if (bonekaMuncul != null) bonekaMuncul.SetActive(true);
+
         if (ObjectiveManager.instance != null) ObjectiveManager.instance.LanjutMisi();
         gameObject.SetActive(false);
     }
+
+    // Fungsi AutoIsiNaskah() nggak aku ketik ulang biar gak kepanjangan, isinya sama aja ya!
+
 
     // =========================================================================
     // FITUR MAGIC AI: AUTO FILL NASKAH (SEKARANG PLUS GAMBAR!)

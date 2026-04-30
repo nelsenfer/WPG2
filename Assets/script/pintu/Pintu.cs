@@ -18,6 +18,10 @@ public class Pintu : MonoBehaviour
     [Header("Pengaturan Misi")]
     public bool pertamaKaliDicek = true;
 
+    // --- FITUR BARU: GEMBOK URUTAN MISI ---
+    [Tooltip("Pintu ini HANYA ganti misi jika player sedang di index misi ini. (Misi 1 = 0, Misi 2 = 1, dst). Isi -1 kalau bebas.")]
+    public int syaratIndexMisi = -1;
+
     [Tooltip("Centang ini jika misi ganti saat GAGAL BUKA (Terkunci)")]
     public bool updateMisiSaatDicek = false;
 
@@ -55,7 +59,11 @@ public class Pintu : MonoBehaviour
 
                 if (updateMisiSaatDicek && ObjectiveManager.instance != null)
                 {
-                    ObjectiveManager.instance.LanjutMisi();
+                    // Cek apakah Taku sedang berada di urutan misi yang tepat untuk pintu ini?
+                    if (syaratIndexMisi == -1 || ObjectiveManager.instance.indeksMisiSaatIni == syaratIndexMisi)
+                    {
+                        ObjectiveManager.instance.LanjutMisi();
+                    }
                 }
             }
         }
@@ -111,11 +119,14 @@ public class Pintu : MonoBehaviour
         isLocked = false;
         if (itemRahasia != null) itemRahasia.SetActive(true);
 
-        // --- FITUR BARU UNTUK MISI 8 KE 9 ---
         if (updateMisiSaatMasuk && ObjectiveManager.instance != null)
         {
-            ObjectiveManager.instance.LanjutMisi();
-            updateMisiSaatMasuk = false; // Matikan biar gak ke-trigger berulang kali
+            // Cek urutan misi sebelum masuk
+            if (syaratIndexMisi == -1 || ObjectiveManager.instance.indeksMisiSaatIni == syaratIndexMisi)
+            {
+                ObjectiveManager.instance.LanjutMisi();
+                updateMisiSaatMasuk = false;
+            }
         }
 
         if (titikTujuan != null)

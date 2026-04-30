@@ -26,17 +26,33 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        // KODE ASLIMU KEMBALI: Pakai tombol I untuk buka tas
+        // Pakai tombol I untuk buka/tutup tas
         if (Input.GetKeyDown(KeyCode.I))
         {
-            ToggleInventory(); // Panggil fungsi baru di bawah!
+            ToggleInventory();
         }
 
         if (isOpen && itemList.Count > 0)
         {
-            if (Input.GetKeyDown(KeyCode.W)) { selectedIndex = Mathf.Max(0, selectedIndex - 1); UpdateInventoryUI(); }
-            if (Input.GetKeyDown(KeyCode.S)) { selectedIndex = Mathf.Min(itemList.Count - 1, selectedIndex + 1); UpdateInventoryUI(); }
-            if (Input.GetKeyDown(KeyCode.Return)) UseItem();
+            // Pindah ke Atas (Bisa W atau Panah Atas)
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                selectedIndex = Mathf.Max(0, selectedIndex - 1);
+                UpdateInventoryUI();
+            }
+
+            // Pindah ke Bawah (Bisa S atau Panah Bawah)
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                selectedIndex = Mathf.Min(itemList.Count - 1, selectedIndex + 1);
+                UpdateInventoryUI();
+            }
+
+            // Eksekusi / Pakai Item (Bisa Enter, Spasi, atau E)
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.E))
+            {
+                UseItem();
+            }
         }
     }
 
@@ -55,7 +71,7 @@ public class Inventory : MonoBehaviour
         // -- Daftar item (panel kiri/utama) --
         if (itemList.Count == 0)
         {
-            itemTextUI.text = "[ BAG KOSONG ]";
+            itemTextUI.text = "[ TAS KOSONG ]";
             descNameUI.text = "—";
             descBodyUI.text = "";
             return;
@@ -67,10 +83,12 @@ public class Inventory : MonoBehaviour
             string baris = itemList[i].data.itemName;
             if (itemList[i].jumlah > 1) baris += "  x" + itemList[i].jumlah;
 
+            // Tambahkan Panah (Cursor) biar jelas kelihatan!
+            // Ganti simbol ▶ pakai tanda > biar support di semua Font!
             if (i == selectedIndex)
-                itemTextUI.text += "<color=#ffffff>" + baris + "</color>\n";
+                itemTextUI.text += "<color=#ffffff>> " + baris + "</color>\n";
             else
-                itemTextUI.text += "<color=#555555>" + baris + "</color>\n";
+                itemTextUI.text += "<color=#888888>  " + baris + "</color>\n";
         }
 
         // -- Keterangan item yang dipilih (panel bawah) --
@@ -83,19 +101,18 @@ public class Inventory : MonoBehaviour
     {
         ItemData itemToUse = itemList[selectedIndex].data;
 
-        // --- LOGIKA BARU: CEK KALAU ITEM INI KERTAS ---
+        // --- LOGIKA BACA SURAT ---
         if (itemToUse.isKertasCatatan)
         {
-            // Buka Pop-up Kertas!
             if (DocumentManager.instance != null)
             {
                 DocumentManager.instance.BukaKertas(itemToUse.isiKertas);
             }
-            // RETURN dipakai buat MENGHENTIKAN fungsi di sini. 
-            // Jadi kode pintu dan hapus item di bawahnya GAK AKAN DIJALANKAN.
+
+            // PENTING: Tutup tas otomatis biar nggak nutupin pop-up surat!
+            ToggleInventory();
             return;
         }
-        // ----------------------------------------------
 
         bool itemTerpakai = false;
 
@@ -135,6 +152,11 @@ public class Inventory : MonoBehaviour
             {
                 itemList[i].jumlah--;
                 if (itemList[i].jumlah <= 0) itemList.RemoveAt(i);
+
+                // Pastikan kursor nggak bablas kalau item terakhir dihapus
+                if (selectedIndex >= itemList.Count) selectedIndex = Mathf.Max(0, itemList.Count - 1);
+
+                if (isOpen) UpdateInventoryUI();
                 return;
             }
         }
@@ -144,6 +166,12 @@ public class Inventory : MonoBehaviour
     {
         isOpen = !isOpen;
         inventoryPanel.SetActive(isOpen);
-        if (isOpen) UpdateInventoryUI();
+
+        // Reset kursor ke atas pas baru buka tas
+        if (isOpen)
+        {
+            selectedIndex = 0;
+            UpdateInventoryUI();
+        }
     }
 }
