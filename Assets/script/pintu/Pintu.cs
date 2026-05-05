@@ -132,7 +132,18 @@ public class Pintu : MonoBehaviour
         if (titikTujuan != null)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null) player.transform.position = titikTujuan.position;
+            if (player != null)
+            {
+                // 1. Pindahkan Taku ke ruangan baru
+                player.transform.position = titikTujuan.position;
+
+                // --- 2. FITUR BARU: AUTO UPDATE CHECKPOINT! ---
+                if (GameOverManager.instance != null)
+                {
+                    GameOverManager.instance.titikCheckpoint = titikTujuan;
+                    Debug.Log("[CHECKPOINT] Spawn point pindah ke pintu baru!");
+                }
+            }
         }
     }
 

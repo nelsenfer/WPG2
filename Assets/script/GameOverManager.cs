@@ -62,6 +62,14 @@ public class GameOverManager : MonoBehaviour
         {
             eventIbuk.ResetEvent();
         }
+
+        // --- FITUR BARU: RESET SEMUA HANTU PATROLI ---
+        // (Pakai FindObjectsByType untuk Unity versi baru)
+        HantuPatroli[] semuaHantu = FindObjectsByType<HantuPatroli>(FindObjectsSortMode.None);
+        foreach (HantuPatroli hantu in semuaHantu)
+        {
+            hantu.ResetHantu();
+        }
     }
 
     public void KeluarGame()
