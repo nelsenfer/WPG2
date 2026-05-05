@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -14,19 +15,30 @@ public class Inventory : MonoBehaviour
 {
     public List<ItemSlot> itemList = new List<ItemSlot>();
 
+    [Header("UI Inventory")]
     public GameObject inventoryPanel;
-    public TMP_Text itemTextUI;   // teks daftar item
-    public TMP_Text descNameUI;   // nama item yang dipilih
-    public TMP_Text descBodyUI;   // keterangan item yang dipilih
+    public TMP_Text itemTextUI;
+    public TMP_Text descNameUI;
+    public TMP_Text descBodyUI;
+
+    // --- FITUR BARU: UI NOTIFIKASI ITEM ---
+    [Header("UI Notifikasi Item Baru")]
+    public GameObject panelNotifBaru;
+    public TMP_Text teksNotifBaru;
 
     public bool isOpen = false;
     private int selectedIndex = 0;
 
     public Pintu pintuTerdekat = null;
 
+    void Start()
+    {
+        // Pastikan panel notif mati saat awal game
+        if (panelNotifBaru != null) panelNotifBaru.SetActive(false);
+    }
+
     void Update()
     {
-        // Pakai tombol I untuk buka/tutup tas
         if (Input.GetKeyDown(KeyCode.I))
         {
             ToggleInventory();
@@ -34,21 +46,18 @@ public class Inventory : MonoBehaviour
 
         if (isOpen && itemList.Count > 0)
         {
-            // Pindah ke Atas (Bisa W atau Panah Atas)
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 selectedIndex = Mathf.Max(0, selectedIndex - 1);
                 UpdateInventoryUI();
             }
 
-            // Pindah ke Bawah (Bisa S atau Panah Bawah)
             if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
             {
                 selectedIndex = Mathf.Min(itemList.Count - 1, selectedIndex + 1);
                 UpdateInventoryUI();
             }
 
-            // Eksekusi / Pakai Item (Bisa Enter, Spasi, atau E)
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.E))
             {
                 UseItem();
@@ -58,6 +67,9 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(ItemData newItem)
     {
+        // Panggil notifikasi setiap kali item masuk
+        StartCoroutine(TampilkanNotif(newItem.itemName));
+
         foreach (ItemSlot slot in itemList)
         {
             if (slot.data == newItem) { slot.jumlah++; if (isOpen) UpdateInventoryUI(); return; }
@@ -66,9 +78,23 @@ public class Inventory : MonoBehaviour
         if (isOpen) UpdateInventoryUI();
     }
 
+    // --- FUNGSI MUNCULKAN NOTIF ---
+    private IEnumerator TampilkanNotif(string namaItem)
+    {
+        if (panelNotifBaru != null && teksNotifBaru != null)
+        {
+            teksNotifBaru.text = "Mendapatkan: " + namaItem;
+            panelNotifBaru.SetActive(true);
+
+            // Notif akan hilang otomatis setelah 2.5 detik
+            yield return new WaitForSeconds(2.5f);
+
+            panelNotifBaru.SetActive(false);
+        }
+    }
+
     void UpdateInventoryUI()
     {
-        // -- Daftar item (panel kiri/utama) --
         if (itemList.Count == 0)
         {
             itemTextUI.text = "[ TAS KOSONG ]";
@@ -83,15 +109,12 @@ public class Inventory : MonoBehaviour
             string baris = itemList[i].data.itemName;
             if (itemList[i].jumlah > 1) baris += "  x" + itemList[i].jumlah;
 
-            // Tambahkan Panah (Cursor) biar jelas kelihatan!
-            // Ganti simbol ▶ pakai tanda > biar support di semua Font!
             if (i == selectedIndex)
                 itemTextUI.text += "<color=#ffffff>> " + baris + "</color>\n";
             else
                 itemTextUI.text += "<color=#888888>  " + baris + "</color>\n";
         }
 
-        // -- Keterangan item yang dipilih (panel bawah) --
         ItemData cur = itemList[selectedIndex].data;
         descNameUI.text = cur.itemName;
         descBodyUI.text = cur.itemDescription;
@@ -101,16 +124,10 @@ public class Inventory : MonoBehaviour
     {
         ItemData itemToUse = itemList[selectedIndex].data;
 
-        // --- LOGIKA BACA SURAT ---
         if (itemToUse.isKertasCatatan)
         {
-            if (DocumentManager.instance != null)
-            {
-                DocumentManager.instance.BukaKertas(itemToUse.isiKertas);
-            }
-
-            // PENTING: Tutup tas otomatis biar nggak nutupin pop-up surat!
             ToggleInventory();
+            StartCoroutine(BukaKertasDelay(itemToUse.isiKertas));
             return;
         }
 
@@ -135,6 +152,16 @@ public class Inventory : MonoBehaviour
         UpdateInventoryUI();
     }
 
+    IEnumerator BukaKertasDelay(string isiSurat)
+    {
+        yield return null;
+
+        if (DocumentManager.instance != null)
+        {
+            DocumentManager.instance.BukaKertas(isiSurat);
+        }
+    }
+
     public bool CekPunyaItem(ItemData itemDicari)
     {
         foreach (ItemSlot slot in itemList)
@@ -152,10 +179,7 @@ public class Inventory : MonoBehaviour
             {
                 itemList[i].jumlah--;
                 if (itemList[i].jumlah <= 0) itemList.RemoveAt(i);
-
-                // Pastikan kursor nggak bablas kalau item terakhir dihapus
                 if (selectedIndex >= itemList.Count) selectedIndex = Mathf.Max(0, itemList.Count - 1);
-
                 if (isOpen) UpdateInventoryUI();
                 return;
             }
@@ -166,8 +190,6 @@ public class Inventory : MonoBehaviour
     {
         isOpen = !isOpen;
         inventoryPanel.SetActive(isOpen);
-
-        // Reset kursor ke atas pas baru buka tas
         if (isOpen)
         {
             selectedIndex = 0;
