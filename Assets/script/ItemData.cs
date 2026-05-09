@@ -1,9 +1,13 @@
 using UnityEngine;
 
-// Baris ini membuat menu baru saat kamu klik kanan di jendela Project Unity
-[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
+[CreateAssetMenu(fileName = "Item", menuName = "Item Data")]
 public class ItemData : ScriptableObject
 {
-    // Cukup simpan nama itemnya saja untuk sekarang
     public string itemName;
+    [TextArea] public string itemDescription;
+    public Sprite icon;
+
+    // --- TAMBAHAN BARU UNTUK KERTAS ---
+    public bool isKertasCatatan = false; // Centang kalau ini item kertas
+    [TextArea(5, 10)] public string isiKertas; // Isi tulisan di dalam kertasnya
 }

@@ -4,46 +4,51 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;
     private Rigidbody2D rb;
-    private Inventory inventoryPlayer; 
-    
-    // Tambahkan referensi Animator
-    private Animator anim; 
+    private Inventory inventoryPlayer;
+    private Animator anim;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        inventoryPlayer = GetComponent<Inventory>(); 
-        
-        // Mengambil komponen Animator dari Player
-        anim = GetComponent<Animator>(); 
+
+        // --- INI YANG DI-UPDATE BIAR GAK WARNING LAGI ---
+        inventoryPlayer = FindFirstObjectByType<Inventory>();
+
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
-        if (inventoryPlayer.isOpen == true)
+        // --- SATPAM PENGECEKAN KONDISI ---
+        bool lagiBukaTas = inventoryPlayer != null && inventoryPlayer.isOpen;
+        bool lagiBacaDialog = DialogManager.instance != null && DialogManager.instance.sedangDialog;
+        bool lagiBacaTutorial = HintManager.instance != null && HintManager.instance.gameSedangPause;
+
+        // TAMBAHAN SATPAM KERTAS:
+        bool lagiBacaKertas = DocumentManager.instance != null && DocumentManager.instance.sedangBaca;
+
+        bool lagiBukaGembok = NumpadManager.instance != null && NumpadManager.instance.sedangBukaGembok;
+
+        // Kalau lagi ngapain aja yang butuh fokus, stop pergerakan!
+        if (lagiBukaTas || lagiBacaDialog || lagiBacaTutorial || lagiBacaKertas || lagiBukaGembok)
         {
             rb.linearVelocity = Vector2.zero;
-            anim.SetFloat("Speed", 0f); // Beritahu animasi untuk diam
-            return; 
+            anim.SetFloat("Speed", 0f);
+            return;
         }
 
+        // --- LOGIKA GERAK NORMAL ---
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
-        
-        // Menggerakkan player
+
         rb.linearVelocity = new Vector2(moveX * speed, moveY * speed);
 
-        // --- LOGIKA ANIMASI ---
-        
-        // Cek apakah player sedang menekan tombol gerak
-        if (moveX != 0 || moveY != 0) 
+        if (moveX != 0 || moveY != 0)
         {
-            // Kirim arah X dan Y ke Animator agar karakter menghadap arah yang benar
             anim.SetFloat("MoveX", moveX);
             anim.SetFloat("MoveY", moveY);
         }
 
-        // Kirim kecepatan player ke Animator (jika lebih dari 0.1, dia akan berubah dari Idle ke Walk)
         anim.SetFloat("Speed", rb.linearVelocity.magnitude);
     }
 }

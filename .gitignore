@@ -6,8 +6,9 @@
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
-[Logs]/
-[MemoryCaptures]/
+Logs/
+MemoryCaptures/
+UserSettings/
 
 # --- File Project Visual Studio ---
 ExportedObj/

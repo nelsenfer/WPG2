@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d276304d48f951b479ec0a3aa9f2c07c, type: 3}
+  m_Name: Data_Surat6
+  m_EditorClassIdentifier: 
+  itemName: Surat 6
+  itemDescription: surat misterius
+  icon: {fileID: 0}
+  isKertasCatatan: 1
+  isiKertas: "Jika kau bertemu dengannya,\nkau akan langsung mengenalinya.\nIa berdiri
+    dengan wajah tertutup masker,\nrapi\u2026 hampir seperti orang biasa.\n\nNamun
+    itu hanya bagian luarnya.\nSaat penutup itu tidak lagi ada,\nyang terlihat <b>bukan
+    sekadar luka.</b>\n\nMulutnya terbelah lebar hingga <u>mendekati telinga.</u>\nBukan
+    goresan kecil\u2014\ntapi <b><color=red>robekan panjang</color></b> yang memaksa
+    senyum itu\nterbuka terlalu jauh.\nSenyum yang tidak bisa ditutup.\n\nIa akan
+    menatapmu tanpa bergerak,\nseolah menunggu sesuatu darimu.\n\n<i>Jika saat itu
+    tiba,\njangan biarkan rasa takut mengendalikan caramu melihatnya.</i>\n\n<b>-
+    James & Chico (2022)</b>"

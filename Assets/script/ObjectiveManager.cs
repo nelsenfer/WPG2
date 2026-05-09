@@ -3,66 +3,69 @@ using TMPro;
 
 public class ObjectiveManager : MonoBehaviour
 {
-    // Trik "Singleton" agar script lain bisa memanggil script ini dengan mudah
     public static ObjectiveManager instance;
 
-    [Header("Pengaturan UI")]
-    public GameObject objectivePanel;
-    public TMP_Text objectiveText;
-
-    [Header("Daftar Misi")]
-    // Array string ini akan muncul sebagai list di Inspector Unity
+    [Header("Daftar Misi (Tulis di Inspector)")]
     public string[] daftarMisi;
+    public int indeksMisiSaatIni = 0;
 
-    // Penunjuk misi nomor berapa yang sedang aktif (dimulai dari 0)
-    private int misiSekarang = 0;
+    [Header("UI Misi Detail (Buka pakai Tab)")]
+    public GameObject panelMisiUI; // ObjectivePanel lama milikmu
+    public TMP_Text teksMisiUI;    // ObjectiveText lama milikmu
+    private bool isMisiOpen = false;
 
-    void Awake()
+    [Header("UI Notifikasi (HUD Permanen)")]
+    public GameObject panelNotifUI; // Panel ini sekarang bakal nyala terus
+    public TMP_Text teksNotifUI;    // Teks misi yang selalu mejeng di layar
+
+    private void Awake()
     {
-        // Mengaktifkan sistem Singleton saat game mulai
-        instance = this;
+        if (instance == null) instance = this;
+        else Destroy(gameObject);
     }
 
-    void Start()
+    private void Start()
     {
+        // Pastikan UI Notif (HUD) langsung NYALA sejak game dimulai
+        if (panelNotifUI != null) panelNotifUI.SetActive(true);
+
+        // Sembunyikan UI Misi Detail (yang pakai Tab) saat game baru dimulai
+        if (panelMisiUI != null) { isMisiOpen = false; panelMisiUI.SetActive(false); }
+
         UpdateUIMisi();
     }
 
-    void Update()
+    private void Update()
     {
-        // Jika tombol Tab DITEKAN dan DITAHAN, panel muncul
+        // Fitur Buka/Tutup Detail Misi pakai Tab
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            objectivePanel.SetActive(true);
-        }
-        // Jika tombol Tab DILEPAS, panel kembali hilang
-        else if (Input.GetKeyUp(KeyCode.Tab))
-        {
-            objectivePanel.SetActive(false);
+            if (panelMisiUI != null)
+            {
+                isMisiOpen = !isMisiOpen;
+                panelMisiUI.SetActive(isMisiOpen);
+            }
         }
     }
 
-    // Fungsi ini bisa dipanggil dari script Item atau Pintu!
     public void LanjutMisi()
     {
-        // Cek agar tidak error jika misi sudah habis
-        if (misiSekarang < daftarMisi.Length - 1)
-        {
-            misiSekarang++; // Pindah ke misi selanjutnya
-            UpdateUIMisi(); // Perbarui teks di layar
-            Debug.Log("Misi Diperbarui!");
-        }
-        else
-        {
-            objectiveText.text = "MISI:\nSemua Misi Selesai!";
-        }
+        indeksMisiSaatIni++;
+        UpdateUIMisi();
+
+        // Kita HAPUS pemanggilan timer/coroutine di sini,
+        // karena UpdateUIMisi() di atas udah otomatis mengganti teksnya.
     }
 
-    void UpdateUIMisi()
+    public void UpdateUIMisi()
     {
-        if (daftarMisi.Length > 0)
-        {
-            objectiveText.text = "MISI SEKARANG:\n" + daftarMisi[misiSekarang];
-        }
+        // Tentukan kata-katanya
+        string kalimatMisi = (indeksMisiSaatIni < daftarMisi.Length) ? daftarMisi[indeksMisiSaatIni] : "Semua misi selesai!";
+
+        // Update teks di Panel Tab
+        if (teksMisiUI != null) teksMisiUI.text = "Objective:\n- " + kalimatMisi;
+
+        // Update teks di Notif Pojok (HUD)
+        if (teksNotifUI != null) teksNotifUI.text = "Misi Saat Ini:\n" + kalimatMisi;
     }
 }
