@@ -35,9 +35,12 @@ public class HantuPatroli : MonoBehaviour
     private Dictionary<LemariSembunyi, float> lemariCuriga = new Dictionary<LemariSembunyi, float>();
     private LemariSembunyi targetInvestigasi;
 
+    private Animator anim;
+
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -122,19 +125,47 @@ public class HantuPatroli : MonoBehaviour
 
     void GerakkanKe(Vector3 target, float speed)
     {
+        // 1. Gerakkan posisi hantu
         transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
-        if (target.x > transform.position.x)
+        // 2. Hitung jarak X dan Y ke tujuan untuk menentukan arah hadap
+        float bedaX = target.x - transform.position.x;
+        float bedaY = target.y - transform.position.y;
+
+        // 3. Cek mana yang lebih besar: jarak Horizontal (X) atau Vertikal (Y)?
+        if (Mathf.Abs(bedaX) > Mathf.Abs(bedaY))
         {
-            sr.flipX = false;
-            if (jarakPandangCollider != null)
-                jarakPandangCollider.localPosition = new Vector2(Mathf.Abs(jarakPandangCollider.localPosition.x), jarakPandangCollider.localPosition.y);
+            // --- GERAK HORIZONTAL (KIRI / KANAN) ---
+            if (bedaX > 0)
+            {
+                anim.Play("HantuJalanKanan_Animation");
+                sr.flipX = false; // Matikan flip kalau punya gambar hadap kanan
+
+                // Geser collider pandangan ke kanan
+                if (jarakPandangCollider != null) jarakPandangCollider.localPosition = new Vector2(Mathf.Abs(jarakPandangCollider.localPosition.x), jarakPandangCollider.localPosition.y);
+            }
+            else
+            {
+                anim.Play("HantuJalanKiri_Animation");
+                sr.flipX = true; // Nyalakan flip (opsional tergantung gambarmu)
+
+                // Geser collider pandangan ke kiri
+                if (jarakPandangCollider != null) jarakPandangCollider.localPosition = new Vector2(-Mathf.Abs(jarakPandangCollider.localPosition.x), jarakPandangCollider.localPosition.y);
+            }
         }
-        else if (target.x < transform.position.x)
+        else
         {
-            sr.flipX = true;
-            if (jarakPandangCollider != null)
-                jarakPandangCollider.localPosition = new Vector2(-Mathf.Abs(jarakPandangCollider.localPosition.x), jarakPandangCollider.localPosition.y);
+            // --- GERAK VERTIKAL (ATAS / BAWAH) ---
+            if (bedaY > 0)
+            {
+                anim.Play("HantuJalanAtas_Animation");
+                // Pandangan bisa diputar ke atas (Z rotation) atau dibiarkan
+            }
+            else
+            {
+                anim.Play("HantuJalanBawah_Animation");
+                // Pandangan bisa diputar ke bawah
+            }
         }
     }
 
@@ -172,6 +203,9 @@ public class HantuPatroli : MonoBehaviour
     {
         sedangNgecek = true;
         sedangInvestigasi = false;
+
+        anim.Play("HantuIdle_Animation");
+
         yield return new WaitForSeconds(waktuNgecek);
 
         // Cek apakah player keluar saat dicheck (collider aktif = player keluar panik)
