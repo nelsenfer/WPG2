@@ -147,7 +147,7 @@ public class HantuPatroli : MonoBehaviour
             else
             {
                 anim.Play("HantuJalanKiri_Animation");
-                sr.flipX = true; // Nyalakan flip (opsional tergantung gambarmu)
+                sr.flipX = false; // Matikan flip karena gambar animasi aslinya sudah menghadap kiri
 
                 // Geser collider pandangan ke kiri
                 if (jarakPandangCollider != null) jarakPandangCollider.localPosition = new Vector2(-Mathf.Abs(jarakPandangCollider.localPosition.x), jarakPandangCollider.localPosition.y);
