@@ -16,7 +16,8 @@ public class PlayerMovement : MonoBehaviour
         // --- INI YANG DI-UPDATE BIAR GAK WARNING LAGI ---
         inventoryPlayer = FindFirstObjectByType<Inventory>();
 
-        anim = GetComponent<Animator>();
+        // --- INI YANG DIUBAH UNTUK MENGATASI ERROR ANIMATOR ---
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -47,12 +48,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (sedangBerjalan)
         {
-        if (!footstepSource.isPlaying)
-            footstepSource.Play();
+            if (footstepSource != null && !footstepSource.isPlaying)
+                footstepSource.Play();
         }
         else
         {
-        footstepSource.Stop();
+            if (footstepSource != null)
+                footstepSource.Stop();
         }
 
         rb.linearVelocity = new Vector2(moveX * speed, moveY * speed);

@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 public class GameOverManager : MonoBehaviour
 {
     public static GameOverManager instance;
+    public bool sudahMati = false;
 
     [Header("UI Game Over")]
     public GameObject gambarDarah;
     public GameObject panelGameOver;
 
-    // PASTIKAN BARIS INI ADA BIAR GAK ERROR!
     [Header("Sistem Checkpoint")]
     public Transform titikCheckpoint;
 
@@ -32,6 +32,16 @@ public class GameOverManager : MonoBehaviour
 
     public void MatiDarah()
     {
+        // 1. CEK SATPAM KEMATIAN
+        if (sudahMati) return;
+
+        // 2. KUNCI STATUSNYA
+        sudahMati = true;
+
+        // 3. CETAK JEJAK DI CONSOLE
+        Debug.Log("FUNGSI MATI TERPANGGIL! Coba cek tulisan ini muncul berapa kali.");
+
+        // 4. PANGGIL COROUTINE UI MATI
         StartCoroutine(ProsesMatiBeruntun());
     }
 
@@ -39,12 +49,17 @@ public class GameOverManager : MonoBehaviour
     {
         if (DialogManager.instance != null) DialogManager.instance.sedangDialog = true;
         if (gambarDarah != null) gambarDarah.SetActive(true);
+
         yield return new WaitForSeconds(2f);
+
         if (panelGameOver != null) panelGameOver.SetActive(true);
     }
 
     public void UlangiGame()
     {
+        // BUKA KUNCI KEMATIAN AGAR BISA MATI LAGI NANTI
+        sudahMati = false;
+
         if (gambarDarah != null) gambarDarah.SetActive(false);
         if (panelGameOver != null) panelGameOver.SetActive(false);
 
@@ -63,14 +78,14 @@ public class GameOverManager : MonoBehaviour
             eventIbuk.ResetEvent();
         }
 
-        // --- FITUR BARU: RESET SEMUA HANTU PATROLI ---
-        // (Pakai FindObjectsByType untuk Unity versi baru)
+        // Reset Semua Hantu Patroli
         HantuPatroli[] semuaHantu = FindObjectsByType<HantuPatroli>(FindObjectsSortMode.None);
         foreach (HantuPatroli hantu in semuaHantu)
         {
             hantu.ResetHantu();
         }
 
+        // Reset Semua Lemari
         CabinetMover[] semuaKabinet = FindObjectsByType<CabinetMover>(FindObjectsSortMode.None);
         foreach (CabinetMover kabinet in semuaKabinet)
         {
