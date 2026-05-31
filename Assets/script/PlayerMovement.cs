@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     private Inventory inventoryPlayer;
     private Animator anim;
 
+    public AudioSource footstepSource;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -40,6 +42,18 @@ public class PlayerMovement : MonoBehaviour
         // --- LOGIKA GERAK NORMAL ---
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
+
+        bool sedangBerjalan = moveX != 0 || moveY != 0;
+
+        if (sedangBerjalan)
+        {
+        if (!footstepSource.isPlaying)
+            footstepSource.Play();
+        }
+        else
+        {
+        footstepSource.Stop();
+        }
 
         rb.linearVelocity = new Vector2(moveX * speed, moveY * speed);
 

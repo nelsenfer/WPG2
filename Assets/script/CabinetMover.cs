@@ -8,6 +8,19 @@ public class CabinetMover : MonoBehaviour
 
     public bool isMoving = false;
 
+    private Vector3 startPosition;
+    void Start()
+    {
+        startPosition = transform.position;
+    }
+    public void ResetCabinet()
+    {
+        StopAllCoroutines();
+
+        transform.position = startPosition;
+        isMoving = false;
+    }
+
     public void MoveCabinet()
     {
         if (!isMoving)
@@ -19,6 +32,7 @@ public class CabinetMover : MonoBehaviour
     IEnumerator MoveToTarget()
     {
         isMoving = true;
+        SoundManager.Instance.PlaySound3D("Kabinet", transform.position);
 
         while (Vector2.Distance(transform.position, targetPoint.position) > 0.01f)
         {
@@ -32,5 +46,7 @@ public class CabinetMover : MonoBehaviour
         }
 
         transform.position = targetPoint.position;
+
+        isMoving = false;
     }
 }

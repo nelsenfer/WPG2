@@ -70,6 +70,12 @@ public class GameOverManager : MonoBehaviour
         {
             hantu.ResetHantu();
         }
+
+        CabinetMover[] semuaKabinet = FindObjectsByType<CabinetMover>(FindObjectsSortMode.None);
+        foreach (CabinetMover kabinet in semuaKabinet)
+        {
+            kabinet.ResetCabinet();
+        }
     }
 
     public void KeluarGame()
