@@ -250,4 +250,16 @@ public class HantuPatroli : MonoBehaviour
             transform.position = titikPatroli[0].position;
         }
     }
+
+    public void PaksaKejar(Transform target)
+    {
+        sedangNgejar = true;
+        sedangNgecek = false;
+        sedangInvestigasi = false;
+        targetTaku = target;
+
+        // Opsional: Langsung ubah animasi ke lari jika perlu
+        Animator anim = GetComponent<Animator>();
+        if (anim != null) anim.Play("HantuJalanKanan"); // Sesuaikan arah hadap awal
+    }
 }
