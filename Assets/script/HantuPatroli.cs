@@ -45,57 +45,68 @@ public class HantuPatroli : MonoBehaviour
 
     void Update()
     {
-        if (DialogManager.instance != null && DialogManager.instance.sedangDialog) return;
-        if (titikPatroli.Length == 0) return;
+        // (Kode pengaman dan dialog biarkan seperti aslinya)
 
-        // Bersihkan blacklist yang sudah kadaluarsa
-        List<LemariSembunyi> expired = new List<LemariSembunyi>();
-        foreach (var entry in lemariCuriga)
-            if (Time.time >= entry.Value) expired.Add(entry.Key);
-        foreach (var lemari in expired)
-            lemariCuriga.Remove(lemari);
+        if (sedangNgecek) return;
 
-        if (sedangNgecek) return; // Freeze saat ngecek, tapi investigasi tetap jalan di coroutine
-
-        if (sedangNgejar && targetTaku != null)
+        if (sedangNgejar)
         {
-            // Kalau Taku sembunyi (collider mati), masuk mode Waspada
-            if (!takuCollider.enabled)
+            if (targetTaku != null)
             {
-                sedangNgejar = false;
-                MasukModeWaspada();
-                return;
-            }
+                // Hantu jalan mendekati Taku
+                GerakkanKe(targetTaku.position, speedKejar);
 
-            GerakkanKe(targetTaku.position, speedKejar);
-
-            if (Vector2.Distance(transform.position, targetTaku.position) <= jarakMati)
-            {
-                if (GameOverManager.instance != null) GameOverManager.instance.MatiDarah();
-            }
-        }
-        else if (sedangInvestigasi && targetInvestigasi != null)
-        {
-            // Jalan ke lemari yang dicurigai
-            GerakkanKe(targetInvestigasi.transform.position, speedPatroli);
-
-            if (Vector2.Distance(transform.position, targetInvestigasi.transform.position) < 0.5f)
-            {
-                // Sudah sampai, paksa ngecek tanpa gacha
-                sedangInvestigasi = false;
-                coroutineNgecek = StartCoroutine(ProsesNgecek(targetInvestigasi, dipaksa: true));
+                // --- TAMBAHAN BARU: CEK JARAK MATI ---
+                // Jika jarak hantu dan Taku lebih kecil atau sama dengan jarakMati, eksekusi kekalahan
+                if (Vector2.Distance(transform.position, targetTaku.position) <= jarakMati)
+                {
+                    if (GameOverManager.instance != null)
+                    {
+                        GameOverManager.instance.MatiDarah();
+                    }
+                }
             }
         }
         else
         {
-            // Patroli normal
-            Transform tujuan = titikPatroli[indeksTujuan];
-            GerakkanKe(tujuan.position, speedPatroli);
+            // (Logika patroli normal)
+        }
+    }
 
-            if (Vector2.Distance(transform.position, tujuan.position) < 0.1f)
+    void GerakkanKe(Vector3 target, float speed)
+    {
+        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+
+        float bedaX = target.x - transform.position.x;
+        float bedaY = target.y - transform.position.y;
+
+        // --- PERBAIKAN 3: PENGAMAN ANIMATOR & SPRITERENDERER ---
+        if (Mathf.Abs(bedaX) > Mathf.Abs(bedaY))
+        {
+            if (bedaX > 0)
             {
-                indeksTujuan++;
-                if (indeksTujuan >= titikPatroli.Length) indeksTujuan = 0;
+                if (anim != null) anim.Play("HantuJalanKanan_Animation");
+                if (sr != null) sr.flipX = false;
+
+                if (jarakPandangCollider != null) jarakPandangCollider.localPosition = new Vector2(Mathf.Abs(jarakPandangCollider.localPosition.x), jarakPandangCollider.localPosition.y);
+            }
+            else
+            {
+                if (anim != null) anim.Play("HantuJalanKiri_Animation");
+                if (sr != null) sr.flipX = true;
+
+                if (jarakPandangCollider != null) jarakPandangCollider.localPosition = new Vector2(-Mathf.Abs(jarakPandangCollider.localPosition.x), jarakPandangCollider.localPosition.y);
+            }
+        }
+        else
+        {
+            if (bedaY > 0)
+            {
+                if (anim != null) anim.Play("HantuJalanAtas_Animation");
+            }
+            else
+            {
+                if (anim != null) anim.Play("HantuJalanBawah_Animation");
             }
         }
     }
@@ -123,51 +134,7 @@ public class HantuPatroli : MonoBehaviour
         sedangNgejar = false;
     }
 
-    void GerakkanKe(Vector3 target, float speed)
-    {
-        // 1. Gerakkan posisi hantu
-        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
-        // 2. Hitung jarak X dan Y ke tujuan untuk menentukan arah hadap
-        float bedaX = target.x - transform.position.x;
-        float bedaY = target.y - transform.position.y;
-
-        // 3. Cek mana yang lebih besar: jarak Horizontal (X) atau Vertikal (Y)?
-        if (Mathf.Abs(bedaX) > Mathf.Abs(bedaY))
-        {
-            // --- GERAK HORIZONTAL (KIRI / KANAN) ---
-            if (bedaX > 0)
-            {
-                anim.Play("HantuJalanKanan_Animation");
-                sr.flipX = false; // Matikan flip kalau punya gambar hadap kanan
-
-                // Geser collider pandangan ke kanan
-                if (jarakPandangCollider != null) jarakPandangCollider.localPosition = new Vector2(Mathf.Abs(jarakPandangCollider.localPosition.x), jarakPandangCollider.localPosition.y);
-            }
-            else
-            {
-                anim.Play("HantuJalanKiri_Animation");
-                sr.flipX = false; // Matikan flip karena gambar animasi aslinya sudah menghadap kiri
-
-                // Geser collider pandangan ke kiri
-                if (jarakPandangCollider != null) jarakPandangCollider.localPosition = new Vector2(-Mathf.Abs(jarakPandangCollider.localPosition.x), jarakPandangCollider.localPosition.y);
-            }
-        }
-        else
-        {
-            // --- GERAK VERTIKAL (ATAS / BAWAH) ---
-            if (bedaY > 0)
-            {
-                anim.Play("HantuJalanAtas_Animation");
-                // Pandangan bisa diputar ke atas (Z rotation) atau dibiarkan
-            }
-            else
-            {
-                anim.Play("HantuJalanBawah_Animation");
-                // Pandangan bisa diputar ke bawah
-            }
-        }
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

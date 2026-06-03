@@ -147,8 +147,8 @@ Transform:
   m_GameObject: {fileID: 27377260}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -160.66, y: -50, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -160.66, y: -50.12, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -165,10 +165,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &27377263
 BoxCollider2D:
@@ -208,7 +212,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -259,8 +263,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -5
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1271,8 +1275,8 @@ Transform:
   m_GameObject: {fileID: 84076247}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -158.66, y: -48, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -158.66, y: -48.24, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -1289,10 +1293,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &84076250
 BoxCollider2D:
@@ -1332,7 +1340,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1383,8 +1391,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -6
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1642,7 +1650,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -152.68, y: -52, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -1659,10 +1667,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &87211662
 BoxCollider2D:
@@ -1702,7 +1714,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1753,8 +1765,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -4
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1959,7 +1971,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -156.66, y: -52, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -1976,10 +1988,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 1
 --- !u!61 &108516382
 BoxCollider2D:
@@ -2019,7 +2035,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2070,8 +2086,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -4
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2109,7 +2125,7 @@ Transform:
   m_GameObject: {fileID: 118175207}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -163.6, y: -16.6, z: 0}
+  m_LocalPosition: {x: -163.6, y: -14.76, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2130,6 +2146,7 @@ MonoBehaviour:
   kuchiJahat: {fileID: 1002678419}
   kuchiAsli: {fileID: 354009001}
   scriptGerakTaku: {fileID: 522327751}
+  namaParameterJalan: Speed
   jarakMasukKamera: 3.5
   titikKaburBawah: {fileID: 1231609720}
   titikKembaliMap2: {fileID: 1231609720}
@@ -2165,7 +2182,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -2639,7 +2656,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -164.66, y: -52, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -2656,10 +2673,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 1
 --- !u!61 &155339892
 BoxCollider2D:
@@ -2699,7 +2720,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2750,8 +2771,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -4
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3856,8 +3877,8 @@ Transform:
   m_GameObject: {fileID: 252359245}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -156.66, y: -46, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -156.66, y: -46.36, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -3874,10 +3895,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &252359248
 BoxCollider2D:
@@ -3917,7 +3942,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3968,8 +3993,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -7
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6151,7 +6176,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -160.66, y: -52, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -6168,10 +6193,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 1
 --- !u!61 &403488330
 BoxCollider2D:
@@ -6211,7 +6240,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6262,8 +6291,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -4
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6752,8 +6781,8 @@ Transform:
   m_GameObject: {fileID: 438000621}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -162.66, y: -50, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -162.66, y: -50.12, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -6770,10 +6799,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 1
 --- !u!61 &438000624
 BoxCollider2D:
@@ -6813,7 +6846,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6864,8 +6897,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -5
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -9201,8 +9234,8 @@ Transform:
   m_GameObject: {fileID: 542216021}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -152.68, y: -46, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -152.68, y: -46.36, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -9219,10 +9252,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &542216024
 BoxCollider2D:
@@ -9262,7 +9299,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -9313,8 +9350,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -7
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -9870,8 +9907,8 @@ Transform:
   m_GameObject: {fileID: 594421108}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -166.64, y: -46, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -166.62, y: -46.36, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -9888,10 +9925,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 1
 --- !u!61 &594421111
 BoxCollider2D:
@@ -9931,7 +9972,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -9982,8 +10023,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -7
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -11466,8 +11507,8 @@ Transform:
   m_GameObject: {fileID: 703057021}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -158.66, y: -46, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -158.66, y: -46.36, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -11484,10 +11525,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 1
 --- !u!61 &703057024
 BoxCollider2D:
@@ -11527,7 +11572,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -11578,8 +11623,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -7
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -12564,8 +12609,8 @@ Transform:
   m_GameObject: {fileID: 784230316}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -166.64, y: -48, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -166.64, y: -48.24, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -12582,10 +12627,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &784230319
 BoxCollider2D:
@@ -12625,7 +12674,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -12676,8 +12725,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -6
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -12983,8 +13032,8 @@ Transform:
   m_GameObject: {fileID: 796290430}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -160.66, y: -48, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -160.66, y: -48.24, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -13001,10 +13050,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 1
 --- !u!61 &796290433
 BoxCollider2D:
@@ -13044,7 +13097,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -13095,8 +13148,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -6
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -13838,7 +13891,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -166.64, y: -52, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -13855,10 +13908,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &825067089
 BoxCollider2D:
@@ -13898,7 +13955,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -13949,8 +14006,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -4
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -14930,8 +14987,8 @@ Transform:
   m_GameObject: {fileID: 869879250}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -152.68, y: -48, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -152.68, y: -48.24, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -14948,10 +15005,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &869879253
 BoxCollider2D:
@@ -14991,7 +15052,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -15042,8 +15103,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -6
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -15219,8 +15280,8 @@ Transform:
   m_GameObject: {fileID: 880640930}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -164.66, y: -46, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -164.66, y: -46.36, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -15237,10 +15298,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &880640933
 BoxCollider2D:
@@ -15280,7 +15345,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -15331,8 +15396,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -7
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -15832,8 +15897,8 @@ Transform:
   m_GameObject: {fileID: 956588828}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -164.66, y: -48, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -164.66, y: -48.24, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -15850,10 +15915,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 1
 --- !u!61 &956588831
 BoxCollider2D:
@@ -15893,7 +15962,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -15944,8 +16013,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -6
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -16865,7 +16934,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.17708874, y: 0.14171171}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -16875,7 +16944,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 11.486162, y: 18.217209}
   m_EdgeRadius: 0
 --- !u!114 &1002678422
 MonoBehaviour:
@@ -17316,11 +17385,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 378709317911712487, guid: 9c7f458aac0484f4bb44eddc40b4d9ff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -55.6
+      value: -54.8
       objectReference: {fileID: 0}
     - target: {fileID: 378709317911712487, guid: 9c7f458aac0484f4bb44eddc40b4d9ff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.31
+      value: 14.59
       objectReference: {fileID: 0}
     - target: {fileID: 378709317911712487, guid: 9c7f458aac0484f4bb44eddc40b4d9ff, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19430,8 +19499,8 @@ Transform:
   m_GameObject: {fileID: 1167891578}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -166.64, y: -50, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -166.64, y: -50.12, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -19474,7 +19543,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -19525,8 +19594,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -5
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -19549,10 +19618,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 1
 --- !u!1 &1170301694
 GameObject:
@@ -20091,8 +20164,8 @@ Transform:
   m_GameObject: {fileID: 1197056278}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -164.66, y: -50, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -164.66, y: -50.12, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -20109,10 +20182,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &1197056281
 BoxCollider2D:
@@ -20152,7 +20229,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -20203,8 +20280,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -5
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -20600,7 +20677,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -21077,7 +21154,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -154.68001, y: -52, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -21094,10 +21171,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &1255553951
 BoxCollider2D:
@@ -21137,7 +21218,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -21188,8 +21269,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -4
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -22642,7 +22723,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -158.66, y: -52, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -22659,10 +22740,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &1362344921
 BoxCollider2D:
@@ -22702,7 +22787,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -22753,8 +22838,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -4
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -25628,8 +25713,8 @@ Transform:
   m_GameObject: {fileID: 1531428558}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -162.66, y: -48, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -162.66, y: -48.24, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -25646,10 +25731,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &1531428561
 BoxCollider2D:
@@ -25689,7 +25778,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -25740,8 +25829,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -6
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -29944,8 +30033,8 @@ Transform:
   m_GameObject: {fileID: 1736058968}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -154.68001, y: -48, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -154.68001, y: -48.24, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -29962,10 +30051,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &1736058971
 BoxCollider2D:
@@ -30005,7 +30098,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -30056,8 +30149,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -6
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -30097,7 +30190,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -162.66, y: -52, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -30114,10 +30207,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &1740496503
 BoxCollider2D:
@@ -30157,7 +30254,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -30208,8 +30305,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -4
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -30608,8 +30705,8 @@ Transform:
   m_GameObject: {fileID: 1763908141}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -162.66, y: -46, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -162.66, y: -46.36, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -30626,10 +30723,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 1
 --- !u!61 &1763908144
 BoxCollider2D:
@@ -30669,7 +30770,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -30720,8 +30821,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -7
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -30835,8 +30936,8 @@ Transform:
   m_GameObject: {fileID: 1776140406}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -154.68001, y: -46, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -154.68001, y: -46.36, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -30853,10 +30954,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &1776140409
 BoxCollider2D:
@@ -30896,7 +31001,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -30947,8 +31052,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -7
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -32333,8 +32438,8 @@ Transform:
   m_GameObject: {fileID: 1869027443}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -158.66, y: -50, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -158.66, y: -50.12, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -32351,10 +32456,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 1
 --- !u!61 &1869027446
 BoxCollider2D:
@@ -32394,7 +32503,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -32445,8 +32554,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -5
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -32485,8 +32594,8 @@ Transform:
   m_GameObject: {fileID: 1876778282}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -152.68, y: -50, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -152.68, y: -50.12, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -32503,10 +32612,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &1876778285
 BoxCollider2D:
@@ -32546,7 +32659,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -32597,8 +32710,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -5
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -33461,8 +33574,8 @@ Transform:
   m_GameObject: {fileID: 1924371296}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -156.66, y: -50, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -156.66, y: -50.12, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -33479,10 +33592,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &1924371299
 BoxCollider2D:
@@ -33522,7 +33639,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -33573,8 +33690,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -5
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -33834,8 +33951,8 @@ Transform:
   m_GameObject: {fileID: 1931844566}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -160.66, y: -46, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -160.66, y: -46.36, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -33852,10 +33969,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &1931844569
 BoxCollider2D:
@@ -33895,7 +34016,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -33946,8 +34067,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -7
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -35017,8 +35138,8 @@ Transform:
   m_GameObject: {fileID: 1968987710}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -156.66, y: -48, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -156.66, y: -48.24, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -35035,10 +35156,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 1
 --- !u!61 &1968987713
 BoxCollider2D:
@@ -35078,7 +35203,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -35129,8 +35254,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -6
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -37179,8 +37304,8 @@ Transform:
   m_GameObject: {fileID: 2079632404}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -154.68001, y: -50, z: -0.054103993}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -154.68001, y: -50.12, z: -0.054103993}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1867385092}
@@ -37197,10 +37322,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c13a7f561b648418c2e89badc3cfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambarAman: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarNetral: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
+  gambarBahaya: {fileID: -1066402192594757896, guid: 50c8eeb2df85bc44296a221e20b9a5a1, type: 3}
   waktuBahaya: 1.5
   waktuNetral: 1
   waktuAman: 1.5
   waktuTundaAwal: 0
+  durasiToleransi: 0.2
   mulaiDariBahaya: 0
 --- !u!61 &2079632407
 BoxCollider2D:
@@ -37240,7 +37369,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 18.01, y: 17.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -37291,8 +37420,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: -5
+  m_Sprite: {fileID: 5597544691272303488, guid: da2befb5e5560ab4fa9395a17b7dba4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

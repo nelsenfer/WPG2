@@ -91,6 +91,19 @@ public class GameOverManager : MonoBehaviour
         {
             kabinet.ResetCabinet();
         }
+
+        // --- TAMBAHAN BARU: RESET TRIGGER MAP 4 ---
+        TriggerMulaiKejar triggerKejar = FindFirstObjectByType<TriggerMulaiKejar>();
+        if (triggerKejar != null)
+        {
+            triggerKejar.ResetTrigger();
+        }
+
+        CutsceneKuchisakeAkhir triggerCutscene = FindFirstObjectByType<CutsceneKuchisakeAkhir>();
+        if (triggerCutscene != null)
+        {
+            triggerCutscene.ResetCutscene();
+        }
     }
 
     public void KeluarGame()

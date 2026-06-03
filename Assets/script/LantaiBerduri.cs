@@ -3,11 +3,19 @@ using UnityEngine;
 
 public class LantaiBerduri : MonoBehaviour
 {
+    [Header("Pengaturan Gambar (Sprite)")]
+    public Sprite gambarAman;   // Tarik gambar lantai biasa (duri nutup)
+    public Sprite gambarNetral; // Tarik gambar peringatan (duri setengah keluar)
+    public Sprite gambarBahaya; // Tarik gambar duri tajam nyala penuh
+
     [Header("Pengaturan Waktu Pola")]
-    public float waktuBahaya = 1.5f; // Waktu duri menusuk
-    public float waktuNetral = 1f;   // Waktu jeda/peringatan
-    public float waktuAman = 1.5f;   // Waktu duri sembunyi
+    public float waktuBahaya = 1.5f;
+    public float waktuNetral = 1f;
+    public float waktuAman = 1.5f;
     public float waktuTundaAwal = 0f;
+
+    [Header("Sistem Toleransi")]
+    public float durasiToleransi = 0.2f;
 
     [Header("Pengaturan Kondisi Awal")]
     public bool mulaiDariBahaya = false;
@@ -20,12 +28,14 @@ public class LantaiBerduri : MonoBehaviour
         duriCollider = GetComponent<Collider2D>();
         sr = GetComponent<SpriteRenderer>();
 
+        // Pastikan warna dasar kembali ke putih normal agar gambar aslinya tidak tercampur warna
+        sr.color = Color.white;
+
         StartCoroutine(SiklusDuri());
     }
 
     IEnumerator SiklusDuri()
     {
-        // Jeda awal jika kamu ingin membuat pola ombak antar lantai
         if (waktuTundaAwal > 0)
         {
             yield return new WaitForSeconds(waktuTundaAwal);
@@ -37,30 +47,33 @@ public class LantaiBerduri : MonoBehaviour
         {
             if (apakahBahaya)
             {
-                // --- 1. FASE BAHAYA (MENUSUK) ---
-                sr.color = Color.red;
-                duriCollider.enabled = true; // Bisa membunuh
-                yield return new WaitForSeconds(waktuBahaya);
+                // --- 1. FASE BAHAYA DENGAN TOLERANSI ---
+                sr.sprite = gambarBahaya; // Ganti gambar jadi duri tajam
+                duriCollider.enabled = false;
+
+                yield return new WaitForSeconds(durasiToleransi);
+
+                duriCollider.enabled = true;
+                yield return new WaitForSeconds(waktuBahaya - durasiToleransi);
 
                 // --- 2. FASE NETRAL (PERSIAPAN TURUN) ---
-                sr.color = Color.yellow; // Warna peringatan
-                duriCollider.enabled = false; // Aman diinjak
+                sr.sprite = gambarNetral; // Ganti gambar jadi duri setengah masuk
+                duriCollider.enabled = false;
                 yield return new WaitForSeconds(waktuNetral);
             }
             else
             {
                 // --- 3. FASE AMAN (SEMBUNYI) ---
-                sr.color = Color.white;
-                duriCollider.enabled = false; // Aman diinjak
+                sr.sprite = gambarAman; // Ganti gambar jadi lantai rata
+                duriCollider.enabled = false;
                 yield return new WaitForSeconds(waktuAman);
 
                 // --- 4. FASE NETRAL (PERINGATAN MAU NAIK) ---
-                sr.color = Color.yellow; // Warna peringatan
-                duriCollider.enabled = false; // Masih aman, tapi Taku harus segera lari!
+                sr.sprite = gambarNetral; // Ganti gambar jadi duri mau keluar
+                duriCollider.enabled = false;
                 yield return new WaitForSeconds(waktuNetral);
             }
 
-            // Balikkan status untuk putaran selanjutnya
             apakahBahaya = !apakahBahaya;
         }
     }

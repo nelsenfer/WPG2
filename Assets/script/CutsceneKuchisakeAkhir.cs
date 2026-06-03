@@ -3,19 +3,23 @@ using UnityEngine;
 
 public class CutsceneKuchisakeAkhir : MonoBehaviour
 {
-    [Header("Referensi Objek")]
+    [Header("Referensi Objek Hantu")]
     public GameObject kuchiJahat;
     public GameObject kuchiAsli;
+
+    [Header("Pengaturan Player (Taku)")]
     public MonoBehaviour scriptGerakTaku;
+    [Tooltip("Nama parameter float di Animator player saat berjalan")]
+    public string namaParameterJalan = "Speed"; // Sesuaikan dengan parameter Animator Taku
 
     [Header("Pengaturan Jarak & Posisi")]
-    public float jarakMasukKamera = 3.5f; // Jarak hantu ke Taku sebelum hantu dipaksa kaget
-    public Transform titikKaburBawah;     // Titik di bawah layar buat hantu kabur
-    public Transform titikKembaliMap2;    // Titik asal hantu di Map 2 (untuk reset)
+    public float jarakMasukKamera = 3.5f; 
+    public Transform titikKaburBawah;     
+    public Transform titikKembaliMap2;    
 
     [Header("Pengaturan Waktu Cutscene")]
     public float waktuKaget = 1.5f;
-    public float speedKabur = 6f;
+    public float speedKabur = 6f; 
 
     private bool cutsceneAktif = false;
 
@@ -23,33 +27,46 @@ public class CutsceneKuchisakeAkhir : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !cutsceneAktif)
         {
-            StartCoroutine(MainkanAdegan(collision.transform));
+            // Lempar objek player (Taku) ke dalam coroutine agar komponennya bisa dibaca
+            StartCoroutine(MainkanAdegan(collision.gameObject));
         }
     }
 
-    IEnumerator MainkanAdegan(Transform takuTransform)
+    IEnumerator MainkanAdegan(GameObject player)
     {
         cutsceneAktif = true;
 
-        // 1. FREEZE TAKU, TAPI HANTU TETAP JALAN MENDEKAT
+        // --- 1. REM FISIKA & STOP ANIMASI JALAN (Gaya Cutscene Kucing) ---
         if (scriptGerakTaku != null) scriptGerakTaku.enabled = false;
 
-        // 2. TUNGGU SAMPAI HANTU MASUK LAYAR (JARAK DEKAT)
-        while (Vector2.Distance(kuchiJahat.transform.position, takuTransform.position) > jarakMasukKamera)
+        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+        if (rb != null)
         {
-            yield return null; // Sistem akan menunda kode di bawahnya sampai hantu mendekat
+            rb.linearVelocity = Vector2.zero; // Rem total menggunakan fitur Unity 6
         }
 
-        // 3. HANTU SAMPAI, MATIKAN OTAKNYA
+        Animator animTaku = player.GetComponentInChildren<Animator>();
+        if (animTaku != null)
+        {
+            animTaku.SetFloat(namaParameterJalan, 0f); // Paksa Taku posisi diam
+        }
+
+        // --- 2. TUNGGU HANTU MASUK KAMERA ---
+        while (Vector2.Distance(kuchiJahat.transform.position, player.transform.position) > jarakMasukKamera)
+        {
+            yield return null; 
+        }
+
+        // --- 3. HANTU KAGET ---
         HantuPatroli aiJahat = kuchiJahat.GetComponent<HantuPatroli>();
         if (aiJahat != null) aiJahat.enabled = false;
 
         Animator animJahat = kuchiJahat.GetComponent<Animator>();
         SpriteRenderer srJahat = kuchiJahat.GetComponent<SpriteRenderer>();
 
-        // 4. KUCHI JAHAT KAGET
-        if (animJahat != null) animJahat.Play("HantuIdle");
-
+        // (Pastikan nama ini sudah sama persis dengan yang ada di Animator)
+        if (animJahat != null) animJahat.Play("HantuIdle_Animation"); 
+        
         if (kuchiAsli.transform.position.x > kuchiJahat.transform.position.x)
             srJahat.flipX = false;
         else
@@ -57,29 +74,28 @@ public class CutsceneKuchisakeAkhir : MonoBehaviour
 
         yield return new WaitForSeconds(waktuKaget);
 
-        // 5. KUCHI JAHAT LARI KABUR KE BAWAH
-        if (animJahat != null) animJahat.Play("HantuJalanBawah"); // Animasi lari ke bawah
-
+        // --- 4. HANTU LARI KE BAWAH ---
+        if (animJahat != null) animJahat.Play("HantuJalanBawah_Animation"); 
+        
         while (Vector2.Distance(kuchiJahat.transform.position, titikKaburBawah.position) > 0.1f)
         {
             kuchiJahat.transform.position = Vector2.MoveTowards(kuchiJahat.transform.position, titikKaburBawah.position, speedKabur * Time.deltaTime);
-            yield return null;
+            yield return null; 
         }
 
-        // 6. TELEPORT KEMBALI KE MAP 2 DAN RESET
+        // --- 5. RESET HANTU JAHAT ---
         kuchiJahat.transform.position = titikKembaliMap2.position;
-        if (aiJahat != null)
+        if (aiJahat != null) 
         {
-            aiJahat.enabled = true; // Nyalakan lagi otaknya
-            aiJahat.ResetHantu();   // Kembalikan ke mode patroli normal di Map 2
+            aiJahat.enabled = true; 
+            aiJahat.ResetHantu();   
         }
-        kuchiJahat.SetActive(false); // Matikan sementara (Nanti dinyalakan lagi sama Trigger 1)
+        kuchiJahat.SetActive(false); 
 
-        // 7. KEMBALIKAN KONTROL TAKU
+        // --- 6. KEMBALIKAN KONTROL TAKU ---
         if (scriptGerakTaku != null) scriptGerakTaku.enabled = true;
     }
-
-    // Fungsi ini dipanggil jika Taku mati agar cutscene bisa diulang
+    
     public void ResetCutscene()
     {
         cutsceneAktif = false;
