@@ -12,6 +12,7 @@ public class TriggerMulaiKejar : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !sudahTerpicu)
         {
+
             sudahTerpicu = true;
 
             // Tarik Kuchi Jahat dari Map 2 ke bawah layar Map 4

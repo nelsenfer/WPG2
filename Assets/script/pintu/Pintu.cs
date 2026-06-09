@@ -81,6 +81,7 @@ public class Pintu : MonoBehaviour
     {
         if (isLocked)
         {
+
             if (pertamaKaliDicek)
             {
                 pertamaKaliDicek = false;
@@ -107,6 +108,7 @@ public class Pintu : MonoBehaviour
             }
 
             MunculkanDialog(dialogTerkunci);
+
         }
         else
         {

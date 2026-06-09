@@ -1,0 +1,12 @@
+Tiger 
+- Kuciang, CutsceneKucing.cs line 95
+- pickup item, PickupItem.cs Line 42
+- hantu ngejar map 2, HantuPatroli.cp Line 139 // coba dulu sekalian di map 4 jika ke trifer bawahnya gak usah
+- hantu kejar map 4, TriggerMulaiKejar.cp Line 11
+- mati hantu jahat, HantuPatroli.cp Line 65 
+- mati, GameOverManager Line 48
+- duri on, LantaiBerduri Line 48
+- pintu terkunci, Pintu.cp line 111
+- notif misi, ObjectiveManager Line 55
+- bgm udah di bahas
+- 
