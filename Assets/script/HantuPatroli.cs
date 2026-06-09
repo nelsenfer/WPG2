@@ -45,34 +45,68 @@ public class HantuPatroli : MonoBehaviour
 
     void Update()
     {
-        // (Kode pengaman dan dialog biarkan seperti aslinya)
+        // 1. PENGAMAN TITIK PATROLI
+        if ((DialogManager.instance != null && DialogManager.instance.sedangDialog) || titikPatroli == null || titikPatroli.Length == 0)
+        {
+            if (anim != null) anim.Play("HantuIdle_Animation");
+            return;
+        }
+
+        // 2. KODE PEMBERSIH BLACKLIST YANG HILANG
+        List<LemariSembunyi> daftarHapus = new List<LemariSembunyi>();
+        foreach (var item in lemariCuriga)
+        {
+            if (Time.time > item.Value) daftarHapus.Add(item.Key);
+        }
+        foreach (var lemari in daftarHapus)
+        {
+            lemariCuriga.Remove(lemari);
+        }
 
         if (sedangNgecek) return;
 
+        // 3. LOGIKA KEJAR
         if (sedangNgejar)
         {
             if (targetTaku != null)
             {
-                // Hantu jalan mendekati Taku
+                // Cek apakah Taku sembunyi (collider mati)
+                if (takuCollider != null && !takuCollider.enabled)
+                {
+                    sedangNgejar = false;
+                    targetTaku = null;
+                    return;
+                }
+
                 GerakkanKe(targetTaku.position, speedKejar);
 
-                // --- TAMBAHAN BARU: CEK JARAK MATI ---
-                // Jika jarak hantu dan Taku lebih kecil atau sama dengan jarakMati, eksekusi kekalahan
                 if (Vector2.Distance(transform.position, targetTaku.position) <= jarakMati)
                 {
-                    if (GameOverManager.instance != null)
-                    {
-                        GameOverManager.instance.MatiDarah();
-                    }
+                    if (GameOverManager.instance != null) GameOverManager.instance.MatiDarah();
                 }
             }
         }
+        // 4. LOGIKA PATROLI NORMAL YANG HILANG
         else
         {
-            // (Logika patroli normal)
+            if (sedangInvestigasi && targetInvestigasi != null)
+            {
+                // Jalan ke arah lemari curiga
+                GerakkanKe(targetInvestigasi.transform.position, speedPatroli);
+            }
+            else
+            {
+                // Jalan patroli keliling titik
+                GerakkanKe(titikPatroli[indeksTujuan].position, speedPatroli);
+
+                // Jika sudah sampai di titik tujuan, ganti target ke titik berikutnya
+                if (Vector2.Distance(transform.position, titikPatroli[indeksTujuan].position) < 0.1f)
+                {
+                    indeksTujuan = (indeksTujuan + 1) % titikPatroli.Length;
+                }
+            }
         }
     }
-
     void GerakkanKe(Vector3 target, float speed)
     {
         transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
@@ -80,7 +114,6 @@ public class HantuPatroli : MonoBehaviour
         float bedaX = target.x - transform.position.x;
         float bedaY = target.y - transform.position.y;
 
-        // --- PERBAIKAN 3: PENGAMAN ANIMATOR & SPRITERENDERER ---
         if (Mathf.Abs(bedaX) > Mathf.Abs(bedaY))
         {
             if (bedaX > 0)
@@ -93,7 +126,8 @@ public class HantuPatroli : MonoBehaviour
             else
             {
                 if (anim != null) anim.Play("HantuJalanKiri_Animation");
-                if (sr != null) sr.flipX = true;
+                // --- PERBAIKAN: Ubah jadi false agar gambarnya tidak dibalik lagi ---
+                if (sr != null) sr.flipX = false;
 
                 if (jarakPandangCollider != null) jarakPandangCollider.localPosition = new Vector2(-Mathf.Abs(jarakPandangCollider.localPosition.x), jarakPandangCollider.localPosition.y);
             }

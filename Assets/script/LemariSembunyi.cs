@@ -65,10 +65,13 @@ public class LemariSembunyi : MonoBehaviour
             playerDiDekat = true;
             playerObj = collision.gameObject;
 
-            playerSprite = playerObj.GetComponent<SpriteRenderer>();
+            // --- PERBAIKAN: Gunakan GetComponentInChildren untuk Sprite dan Animator ---
+            playerSprite = playerObj.GetComponentInChildren<SpriteRenderer>();
+            playerAnim = playerObj.GetComponentInChildren<Animator>();
+
+            // Komponen fisik dan script tetap dicari di objek induk
             playerMovement = playerObj.GetComponent<PlayerMovement>();
             playerRb = playerObj.GetComponent<Rigidbody2D>();
-            playerAnim = playerObj.GetComponent<Animator>();
             playerCollider = playerObj.GetComponent<Collider2D>();
 
             if (promptUI != null && !playerSedangSembunyi) promptUI.SetActive(true);
