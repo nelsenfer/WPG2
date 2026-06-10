@@ -93,6 +93,7 @@ public class CutsceneKucing : MonoBehaviour
         cam.transform.position = posisiTujuanKamera;
 
         // --- 4. KUCING MENATAP TAKU ---
+        SoundManager.Instance.PlaySound2D("meow");
         yield return new WaitForSeconds(1.5f);
 
         // --- 5. KUCING LARI KE KIRI ---

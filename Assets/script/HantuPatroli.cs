@@ -35,6 +35,17 @@ public class HantuPatroli : MonoBehaviour
     private Dictionary<LemariSembunyi, float> lemariCuriga = new Dictionary<LemariSembunyi, float>();
     private LemariSembunyi targetInvestigasi;
 
+<<<<<<< Updated upstream
+=======
+    private Animator anim;
+
+    private bool sudahMatik = false;
+    public void ResetStatusMatik()
+    {
+        sudahMatik=false;
+    }
+
+>>>>>>> Stashed changes
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -66,9 +77,20 @@ public class HantuPatroli : MonoBehaviour
 
             GerakkanKe(targetTaku.position, speedKejar);
 
+<<<<<<< Updated upstream
             if (Vector2.Distance(transform.position, targetTaku.position) <= jarakMati)
             {
                 if (GameOverManager.instance != null) GameOverManager.instance.MatiDarah();
+=======
+                if (!sudahMatik&&Vector2.Distance(transform.position, targetTaku.position) <= jarakMati)
+                {
+                    sudahMatik = true;
+                    if (GameOverManager.instance != null) GameOverManager.instance.MatiDarah();
+
+                    SoundManager.Instance.PlaySound2D("scream");
+                }
+                
+>>>>>>> Stashed changes
             }
         }
         else if (sedangInvestigasi && targetInvestigasi != null)
@@ -142,6 +164,7 @@ public class HantuPatroli : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !sedangNgejar && !sedangNgecek)
         {
+            SoundManager.Instance.PlaySound2D("Dikejar");
             sedangNgejar = true;
             sedangInvestigasi = false;
             targetTaku = collision.transform;
@@ -207,6 +230,7 @@ public class HantuPatroli : MonoBehaviour
         targetTaku = null;
         targetInvestigasi = null;
         lemariCuriga.Clear();
+        sudahMatik = false;
 
         if (coroutineNgecek != null) StopCoroutine(coroutineNgecek);
 

@@ -32,7 +32,7 @@ public class CabinetMover : MonoBehaviour
     IEnumerator MoveToTarget()
     {
         isMoving = true;
-        SoundManager.Instance.PlaySound3D("Kabinet", transform.position);
+        SoundManager.Instance.PlaySound2D("Kabinet");
 
         while (Vector2.Distance(transform.position, targetPoint.position) > 0.01f)
         {

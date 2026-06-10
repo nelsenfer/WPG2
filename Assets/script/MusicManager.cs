@@ -23,10 +23,20 @@ public class MusicManager : MonoBehaviour
 		}
 	}
 
-	public void PlayMusic(string trackName, float fadeDuration = 0.5f)
-	{
-		StartCoroutine(AnimateMusicCrossfade(musicLibrary.GetClipFromName(trackName), fadeDuration));
-	}
+public void PlayMusic(string trackName, float fadeDuration = 0.5f)
+{
+    // 1. Ambil data lagunya dulu dari library
+    AudioClip nextTrack = musicLibrary.GetClipFromName(trackName);
+
+    // 2. CEK: Jika lagu yang mau diputar SAMA dengan lagu yang sedang nyala, batalkan perintahnya!
+    if (musicSource.clip == nextTrack && musicSource.isPlaying)
+    {
+        return; // Berhenti di sini, jangan lakukan crossfade atau restart
+    }
+
+    // 3. Jika lagunya beda, baru lakukan crossfade seperti biasa
+    StartCoroutine(AnimateMusicCrossfade(nextTrack, fadeDuration));
+}
 
 	IEnumerator AnimateMusicCrossfade(AudioClip nextTrack, float fadeDuration = 0.5f)
 	{

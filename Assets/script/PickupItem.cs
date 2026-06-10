@@ -40,6 +40,7 @@ public class PickupItem : MonoBehaviour
             if (tasPlayer != null)
             {
                 // 1. Masukkan ke Tas
+                SoundManager.Instance.PlaySound2D("pickUp");
                 tasPlayer.AddItem(itemData);
                 Debug.Log($"[DEBUG ITEM] {itemData.itemName} masuk tas!");
 

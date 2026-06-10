@@ -8,6 +8,7 @@ public class TriggerPenggerak : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            SoundManager.Instance.PlaySound2D("Trigger");
             cabinet.MoveCabinet();
         }
     }
