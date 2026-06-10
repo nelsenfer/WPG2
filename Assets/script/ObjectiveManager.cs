@@ -52,6 +52,7 @@ public class ObjectiveManager : MonoBehaviour
     {
         indeksMisiSaatIni++;
         UpdateUIMisi();
+        SoundManager.Instance.PlaySound2D("ting");
 
         // Kita HAPUS pemanggilan timer/coroutine di sini,
         // karena UpdateUIMisi() di atas udah otomatis mengganti teksnya.

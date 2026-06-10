@@ -49,9 +49,8 @@ public class GameOverManager : MonoBehaviour
     {
         if (DialogManager.instance != null) DialogManager.instance.sedangDialog = true;
         if (gambarDarah != null) gambarDarah.SetActive(true);
-
+        SoundManager.Instance.PlaySound2D("blood");
         yield return new WaitForSeconds(2f);
-
         if (panelGameOver != null) panelGameOver.SetActive(true);
     }
 

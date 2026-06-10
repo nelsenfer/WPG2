@@ -37,6 +37,13 @@ public class HantuPatroli : MonoBehaviour
 
     private Animator anim;
 
+    private bool sudahMatik = false;
+    public void ResetStatusMatik()
+    {
+        sudahMatik = false;
+    }
+
+
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -70,7 +77,6 @@ public class HantuPatroli : MonoBehaviour
         {
             if (targetTaku != null)
             {
-                // Cek apakah Taku sembunyi (collider mati)
                 if (takuCollider != null && !takuCollider.enabled)
                 {
                     sedangNgejar = false;
@@ -80,9 +86,11 @@ public class HantuPatroli : MonoBehaviour
 
                 GerakkanKe(targetTaku.position, speedKejar);
 
-                if (Vector2.Distance(transform.position, targetTaku.position) <= jarakMati)
+                if (!sudahMatik && Vector2.Distance(transform.position, targetTaku.position) <= jarakMati)
                 {
+                    sudahMatik = true;
                     if (GameOverManager.instance != null) GameOverManager.instance.MatiDarah();
+                    SoundManager.Instance.PlaySound2D("scream");
                 }
             }
         }
@@ -174,6 +182,7 @@ public class HantuPatroli : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !sedangNgejar && !sedangNgecek)
         {
+            SoundManager.Instance.PlaySound2D("Dikejar");
             sedangNgejar = true;
             sedangInvestigasi = false;
             targetTaku = collision.transform;
@@ -242,6 +251,7 @@ public class HantuPatroli : MonoBehaviour
         targetTaku = null;
         targetInvestigasi = null;
         lemariCuriga.Clear();
+        sudahMatik = false;
 
         if (coroutineNgecek != null) StopCoroutine(coroutineNgecek);
 

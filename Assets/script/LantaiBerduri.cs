@@ -47,6 +47,9 @@ public class LantaiBerduri : MonoBehaviour
         {
             if (apakahBahaya)
             {
+                // --- PERBAIKAN: Marker Git dihapus, baris suara dari temanmu dipertahankan ---
+                SoundManager.Instance.PlaySound3D("SpikeTrap", transform.position);
+
                 // --- 1. FASE BAHAYA DENGAN TOLERANSI ---
                 sr.sprite = gambarBahaya; // Ganti gambar jadi duri tajam
                 duriCollider.enabled = false;

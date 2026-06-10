@@ -119,7 +119,7 @@ public class Pintu : MonoBehaviour
     public void BukaPintu()
     {
         isLocked = false;
-        SoundManager.Instance.PlaySound3D("doorOpen", transform.position);
+        SoundManager.Instance.PlaySound2D("doorOpen");
         if (itemRahasia != null) itemRahasia.SetActive(true);
 
         if (updateMisiSaatMasuk && ObjectiveManager.instance != null)

@@ -54,7 +54,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 10
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -320,18 +320,12 @@ MonoBehaviour:
   - groupID: meow
     clips:
     - {fileID: 8300000, guid: 90ff501548623544ba868946e41ca4b0, type: 3}
+  - groupID: Trigger
+    clips:
+    - {fileID: 8300000, guid: 810de0e63359be846a5e9f064e8d00d7, type: 3}
   - groupID: Kabinet
     clips:
-    - {fileID: 0}
-  - groupID: Kabinet
-    clips:
-    - {fileID: 0}
-  - groupID: Kabinet
-    clips:
-    - {fileID: 0}
-  - groupID: Kabinet
-    clips:
-    - {fileID: 0}
+    - {fileID: 8300000, guid: 1770a7170b232a847a93964dcf6b2c40, type: 3}
   - groupID: Kabinet
     clips:
     - {fileID: 0}
