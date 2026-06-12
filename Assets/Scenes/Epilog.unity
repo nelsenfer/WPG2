@@ -128,7 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 37010998}
-  - component: {fileID: 37010997}
+  - component: {fileID: 37010999}
   m_Layer: 0
   m_Name: epilogmanager
   m_TagString: Untagged
@@ -136,46 +136,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &37010997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 37010996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c0ff3ab484b8184cae59387c4638e00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teksPrologue: {fileID: 198746873}
-  alurCerita:
-  - "Cahaya itu perlahan memenuhi pandangan Taku.\nLembut\u2026 tidak menyilaukan,
-    justru terasa hangat."
-  - 'Segalanya mulai memudar.
-
-    Suara, bayangan, bahkan rasa takut yang sempat
-    ia rasakan.'
-  - 'Taku terdiam.
-
-    Untuk pertama kalinya, ia tidak sedang mencari apa pun.'
-  - "Dari semua yang ia lalui,\nia mulai mengerti\u2026"
-  - "Dari semua yang ia lalui,\nia mulai mengerti\u2026"
-  - 'Bahwa tidak semua yang tampak menakutkan,
-
-    benar-benar ingin menakuti.'
-  - 'Ada luka yang terlalu dalam,
-
-    hingga hanya bisa terlihat sebagai sesuatu
-    yang salah.'
-  - "Dan di balik itu,\nselalu ada seseorang\u2026\nyang hanya ingin dipahami."
-  - "Cahaya itu semakin terang,\nhingga menelan semuanya tanpa sisa.\nDan di dalam
-    keheningan itu,\ntersisa satu kalimat\u2014"
-  - "\u201C\u2026terima kasih\u2026 karena sudah melihatku\u2026 sebagai manusia.\u201D\n"
-  - "Cahaya perlahan meredup.\nTaku kembali.\nNamun, kali ini\u2026\nia tidak pulang
-    sebagai orang yang sama."
-  kecepatanKetik: 0.05
-  namaSceneGame: MainMenu
 --- !u!4 &37010998
 Transform:
   m_ObjectHideFlags: 0
@@ -191,6 +151,47 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &37010999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37010996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a838ddd958aa5a7438ab4db404bec6e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teksPrologue: {fileID: 198746873}
+  alurCerita:
+  - "Cahaya itu perlahan memenuhi pandangan Taku.\nLembut\u2026 tidak menyilaukan,
+    justru terasa hangat.\n"
+  - 'Segalanya mulai memudar.
+
+    Suara, bayangan, bahkan rasa takut yang sempat
+    ia rasakan.
+
+'
+  - 'Taku terdiam.
+
+    Untuk pertama kalinya, ia tidak sedang mencari apa pun.'
+  - "Dari semua yang ia lalui,\nia mulai mengerti\u2026\n"
+  - 'Bahwa tidak semua yang tampak menakutkan,
+
+    benar-benar ingin menakuti.'
+  - 'Ada luka yang terlalu dalam,
+
+    hingga hanya bisa terlihat sebagai sesuatu
+    yang salah.'
+  - "Dan di balik itu,\nselalu ada seseorang\u2026\nyang hanya ingin dipahami."
+  - "Cahaya itu semakin terang,\nhingga menelan semuanya tanpa sisa.\nDan di dalam
+    keheningan itu,\ntersisa satu kalimat\u2014"
+  - "\u201C\u2026terima kasih\u2026 karena sudah melihatku\u2026 sebagai manusia.\u201D"
+  - "Cahaya perlahan meredup.\nTaku kembali.\nNamun, kali ini\u2026\nia tidak pulang
+    sebagai orang yang sama."
+  kecepatanKetik: 0.05
+  namaSceneGame: MainMenu
 --- !u!1 &198746871
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,8 +440,8 @@ Camera:
   m_GameObject: {fileID: 990690787}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

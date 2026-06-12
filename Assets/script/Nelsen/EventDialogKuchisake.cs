@@ -188,13 +188,13 @@ public class EventDialogKuchisake : MonoBehaviour
             MonoBehaviour[] scripts = player.GetComponents<MonoBehaviour>();
             foreach (MonoBehaviour s in scripts) { if (s.GetType().Name == "PlayerMovement") s.enabled = false; }
 
-            // 2. Nyalakan Animasi Jalan
-            Animator animTaku = player.GetComponent<Animator>();
+            // 2. Nyalakan Animasi Jalan (Ambil Animator dari Child)
+            Animator animTaku = player.GetComponentInChildren<Animator>();
             if (animTaku != null)
             {
-                animTaku.SetFloat("Horizontal", 0f);
-                animTaku.SetFloat("Vertical", 1f); // Hadap atas
-                animTaku.SetFloat("Speed", 1f);    // Jalan
+                animTaku.SetFloat("MoveX", 0f);
+                animTaku.SetFloat("MoveY", 1f); // Hadap atas / jalan ke depan
+                animTaku.SetFloat("Speed", 1f);    // Status berjalan
             }
 
             // 3. Taku meluncur pelan-pelan ke pintu

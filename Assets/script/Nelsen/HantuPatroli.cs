@@ -194,6 +194,13 @@ public class HantuPatroli : MonoBehaviour
 
         if (tempatSembunyi != null && !sedangNgecek && !sedangNgejar && !sedangInvestigasi)
         {
+            // --- TAMBAHAN BARU: ZONA AMAN 100% ---
+            // Jika Taku sedang ada di dalam lemari ini, hantu akan buta dan lewat begitu saja
+            if (tempatSembunyi.playerSedangSembunyi)
+            {
+                return;
+            }
+
             // Kalau lemari ini ada di blacklist → langsung cek tanpa gacha
             if (lemariCuriga.ContainsKey(tempatSembunyi))
             {
